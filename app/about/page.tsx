@@ -1,10 +1,26 @@
 // app/about/page.tsx
+import Image from 'next/image'
 
 const VALUES = [
-    { emoji: '🎯', title: 'Revenue over vanity', description: "We don't celebrate impressions. We celebrate profit. Every metric we report connects to money in your account." },
-    { emoji: '🧪', title: 'Test everything', description: "We don't guess. We test angles, hooks, pages, offers — one variable at a time. Data decides what scales." },
-    { emoji: '🤝', title: 'Radical transparency', description: "You see everything. Every dollar spent, every result, every decision. We send real reports, not dashboards designed to impress." },
-  ]
+  {
+    icon: 'icons8-outcome-64.png',   // public/icons/outcome.svg
+    iconBg: '',
+    title: 'Outcome-obsessed',
+    description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"',
+  },
+  {
+    icon: 'icons8-test-tube-100.png',   // public/icons/cooking.svg
+    iconBg: '',
+    title: "We eat our own cooking",
+    description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it.",
+  },
+  {
+    icon: 'icons8-handshake-64.png',      // public/icons/team.svg
+    iconBg: '',
+    title: 'Small team, not a factory',
+    description: "You'll know your strategist by name. We take on max 3 new clients/month.",
+  },
+]
   
   const TEAM = [
     { name: 'Ikrash Ovais', role: 'CEO & Co-Founder' },
@@ -41,22 +57,33 @@ const VALUES = [
           </div>
         </section>
   
-        {/* Values */}
-        <section style={{ background: '#fff', padding: '80px 32px' }}>
-          <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
-            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>Our values</div>
-            <h2 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, fontSize: 'clamp(24px,3vw,36px)', color: '#1C2A42', marginBottom: '32px', lineHeight: 1.1 }}>What we believe.</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="values-grid">
-              {VALUES.map((v, i) => (
-                <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
-                  <div style={{ fontSize: '28px', marginBottom: '12px' }}>{v.emoji}</div>
-                  <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{v.title}</h3>
-                  <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{v.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+       {/* Why Us */}
+       <section style={{ background: '#F2F5F8', padding: '60px 32px' }}>
+         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
+           <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>Our Values</div>
+           <h2 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, fontSize: 'clamp(30px,4vw,44px)', color: '#1C2A42', marginBottom: '40px', lineHeight: 1.1 }}>
+             What we believe.
+           </h2>
+           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="why-grid">
+             {VALUES.map((w, i) => (
+               <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
+                 {/* Icon */}
+                 <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg, display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
+                   <Image
+                     src={`/images/${w.icon}`}
+                     alt={w.title}
+                     width={50}
+                     height={50}
+                     style={{ objectFit: 'contain' }}
+                   />
+                 </div>
+                 <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
+                 <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
+               </div>
+             ))}
+           </div>
+         </div>
+       </section>
   
         {/* Team */}
         <section style={{ background: '#F2F5F8', padding: '80px 32px' }}>

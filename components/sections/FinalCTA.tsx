@@ -52,7 +52,7 @@ interface FinalCTAProps {
           <h2 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(34px,4.5vw,50px)', fontWeight: 800, color: '#fff', marginBottom: '12px', lineHeight: 1.1 }}>{parsedHeading}</h2>
           <p style={{ fontSize: '15px', color: '#A4B3C4', marginBottom: '36px', fontFamily: 'var(--font-jakarta)' }}>{subtext}</p>
           {ghlFormUrl
-            ? <div style={{ background: '#fff', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(8,14,28,.2)', maxWidth: '440px', margin: '0 auto' }}><iframe src={ghlFormUrl} style={{ width: '100%', height: '480px', border: 'none', display: 'block' }} loading="lazy" title="Final CTA Form" /></div>
+            ? <div style={{ background: '#fff', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(8,14,28,.2)', maxWidth: '440px', margin: '0 auto', maxHeight: '520px' }}><iframe src={ghlFormUrl} style={{ width: '100%', height: '515px', border: 'none', display: 'block' }} loading="lazy" title="Final CTA Form" /></div>
             : <DefaultCTAForm scarcity={scarcity} />
           }
         </div>

@@ -1,13 +1,30 @@
-// app/services/page.tsx
 'use client'
+// app/services/page.tsx
+// Why Us icons: public/icons/ folder mein rakhein
 
+import Image from 'next/image'
 import ServicesSection from '@/components/sections/ServicesSection'
 import GuaranteeBar from '@/components/sections/GuaranteeBar'
 
 const WHY_US = [
-  { emoji: '🎯', title: 'Outcome-obsessed', description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"' },
-  { emoji: '🧪', title: "We eat our own cooking", description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it." },
-  { emoji: '🤝', title: 'Small team, not a factory', description: "You'll know your strategist by name. We take on max 3 new clients/month." },
+  {
+    icon: 'icons8-outcome-64.png',   // public/icons/outcome.svg
+    iconBg: '',
+    title: 'Outcome-obsessed',
+    description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"',
+  },
+  {
+    icon: 'icons8-test-tube-100.png',   // public/icons/cooking.svg
+    iconBg: '',
+    title: "We eat our own cooking",
+    description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it.",
+  },
+  {
+    icon: 'icons8-handshake-64.png',      // public/icons/team.svg
+    iconBg: '',
+    title: 'Small team, not a factory',
+    description: "You'll know your strategist by name. We take on max 3 new clients/month.",
+  },
 ]
 
 export default function ServicesPage() {
@@ -40,7 +57,16 @@ export default function ServicesPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="why-grid">
             {WHY_US.map((w, i) => (
               <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
-                <div style={{ fontSize: '28px', marginBottom: '12px' }}>{w.emoji}</div>
+                {/* Icon */}
+                <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg, display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
+                  <Image
+                    src={`/images/${w.icon}`}
+                    alt={w.title}
+                    width={50}
+                    height={50}
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
                 <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
                 <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
               </div>
@@ -58,7 +84,8 @@ export default function ServicesPage() {
             Not sure which service <em style={{ color: '#34D48A', fontStyle: 'italic' }}>fits?</em>
           </h2>
           <p style={{ fontSize: '15px', color: '#A4B3C4', marginBottom: '32px', fontFamily: 'var(--font-jakarta)' }}>Free audit. We'll tell you exactly where to focus first.</p>
-          <a href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '14px 32px', borderRadius: '10px', fontSize: '16px', fontWeight: 700, background: '#25B472', color: '#fff', fontFamily: 'var(--font-jakarta)', transition: 'all 0.2s' }}
+          <a href="/contact"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '14px 32px', borderRadius: '10px', fontSize: '16px', fontWeight: 700, background: '#25B472', color: '#fff', fontFamily: 'var(--font-jakarta)', transition: 'all 0.2s' }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#1C8F5A'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#25B472'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)' }}>
             Get My Free Audit →
@@ -68,7 +95,7 @@ export default function ServicesPage() {
 
       <style>{`
         @media(max-width:900px){
-          .why-grid{grid-template-columns:1fr!important}
+          .why-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>
