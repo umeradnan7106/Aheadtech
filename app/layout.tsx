@@ -4,20 +4,50 @@ import './globals.css'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import Topbar from '@/components/layout/Topbar'
+import { sanityFetch } from '@/sanity/lib/client'
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
+})
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-bricolage',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-jetbrains',
+})
 
 export const metadata: Metadata = {
   title: 'AheadTech360 — We make your marketing make money.',
   description: 'We help small businesses make more money from their marketing. Meta Ads, Google Ads, SEO, CRO, Email, Web Design.',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const SETTINGS_QUERY = `*[_type == "siteSettings"][0]{
+  topbarText, navLinks, phone, email, address, footerTagline
+}`
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await sanityFetch<any>(SETTINGS_QUERY)
+
   return (
-    <html lang="en">
+    <html lang="en" className={`${jakarta.variable} ${bricolage.variable} ${jetbrains.variable}`}>
       <body className="font-body text-gray-900 bg-white antialiased leading-relaxed">
-        <Topbar />
-        <Header />
+        <Topbar text={settings?.topbarText} />
+        <Header navLinks={settings?.navLinks?.length ? settings.navLinks : undefined} />
         {children}
-        <Footer />
+        <Footer
+          phone={settings?.phone}
+          email={settings?.email}
+          address={settings?.address}
+          tagline={settings?.footerTagline}
+        />
       </body>
     </html>
   )

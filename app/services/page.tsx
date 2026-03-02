@@ -1,33 +1,35 @@
-'use client'
 // app/services/page.tsx
-// Why Us icons: public/icons/ folder mein rakhein
-
 import Image from 'next/image'
 import ServicesSection from '@/components/sections/ServicesSection'
 import GuaranteeBar from '@/components/sections/GuaranteeBar'
+import { sanityFetch } from '@/sanity/lib/client'
+
+const QUERY = `*[_type == "servicesPage"][0]{ pageHeading, pageSubheading }`
 
 const WHY_US = [
   {
-    icon: 'icons8-outcome-64.png',   // public/icons/outcome.svg
-    iconBg: '',
+    icon: 'icons8-outcome-64.png',
+    iconBg: '#EEF2F9',
     title: 'Outcome-obsessed',
     description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"',
   },
   {
-    icon: 'icons8-test-tube-100.png',   // public/icons/cooking.svg
-    iconBg: '',
-    title: "We eat our own cooking",
+    icon: 'icons8-test-tube-100.png',
+    iconBg: '#EDFBF3',
+    title: 'We eat our own cooking',
     description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it.",
   },
   {
-    icon: 'icons8-handshake-64.png',      // public/icons/team.svg
-    iconBg: '',
+    icon: 'icons8-handshake-64.png',
+    iconBg: '#FFFAEB',
     title: 'Small team, not a factory',
     description: "You'll know your strategist by name. We take on max 3 new clients/month.",
   },
 ]
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const data = await sanityFetch<any>(QUERY)
+
   return (
     <>
       {/* Hero */}
@@ -35,9 +37,11 @@ export default function ServicesPage() {
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>Our services</div>
           <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(38px,5.5vw,58px)', color: '#1C2A42', marginBottom: '12px', letterSpacing: '-0.3px' }}>
-            The full stack to <em style={{ color: '#25B472', fontStyle: 'italic' }}>scale your revenue.</em>
+            {data?.pageHeading || <>The full stack to <em style={{ color: '#25B472', fontStyle: 'italic' }}>scale your revenue.</em></>}
           </h1>
-          <p style={{ fontSize: '15px', color: '#6E8098', maxWidth: '540px', margin: '0 auto', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>Every service connects to one goal: more revenue per dollar you spend.</p>
+          <p style={{ fontSize: '15px', color: '#6E8098', maxWidth: '540px', margin: '0 auto', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
+            {data?.pageSubheading || 'Every service connects to one goal: more revenue per dollar you spend.'}
+          </p>
         </div>
       </section>
 
@@ -52,12 +56,11 @@ export default function ServicesPage() {
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>Why us</div>
           <h2 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, fontSize: 'clamp(30px,4vw,44px)', color: '#1C2A42', marginBottom: '40px', lineHeight: 1.1 }}>
-            We're not like <em style={{ color: '#25B472', fontStyle: 'italic' }}>other agencies.</em>
+            We&apos;re not like <em style={{ color: '#25B472', fontStyle: 'italic' }}>other agencies.</em>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="why-grid">
             {WHY_US.map((w, i) => (
               <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
-                {/* Icon */}
                 <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg, display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
                   <Image
                     src={`/images/${w.icon}`}
@@ -83,11 +86,9 @@ export default function ServicesPage() {
           <h2 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(34px,4.5vw,50px)', fontWeight: 800, color: '#fff', marginBottom: '12px', lineHeight: 1.1 }}>
             Not sure which service <em style={{ color: '#34D48A', fontStyle: 'italic' }}>fits?</em>
           </h2>
-          <p style={{ fontSize: '15px', color: '#A4B3C4', marginBottom: '32px', fontFamily: 'var(--font-jakarta)' }}>Free audit. We'll tell you exactly where to focus first.</p>
-          <a href="/contact"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '14px 32px', borderRadius: '10px', fontSize: '16px', fontWeight: 700, background: '#25B472', color: '#fff', fontFamily: 'var(--font-jakarta)', transition: 'all 0.2s' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#1C8F5A'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#25B472'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)' }}>
+          <p style={{ fontSize: '15px', color: '#A4B3C4', marginBottom: '32px', fontFamily: 'var(--font-jakarta)' }}>Free audit. We&apos;ll tell you exactly where to focus first.</p>
+          <a href="/contact" className="hover-cta"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '14px 32px', borderRadius: '10px', fontSize: '16px', fontWeight: 700, background: '#25B472', color: '#fff', fontFamily: 'var(--font-jakarta)', transition: 'all 0.2s' }}>
             Get My Free Audit →
           </a>
         </div>

@@ -1,7 +1,7 @@
 // app/contact/page.tsx
-// GHL_FORM_URL ko apna actual GoHighLevel URL se replace karein
+import { sanityFetch } from '@/sanity/lib/client'
 
-const GHL_FORM_URL = 'https://api.aheadtech360.com/widget/form/xMYBaVwqWJaDPiPICqR4' // ← Yahan apna GHL form URL daalen
+const QUERY = `*[_type == "contactPage"][0]{ ghlFormUrl }`
 
 const CONTACT_ITEMS = [
   { icon: '📞', title: 'Call us', detail: '+1 (251) 373-2311' },
@@ -41,7 +41,7 @@ function DefaultContactForm() {
         <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#3E5068', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.5px', fontFamily: 'var(--font-jetbrains)' }}>Biggest problem right now (optional)</label>
         <textarea rows={3} placeholder="E.g. ads aren't profitable, need more leads, site doesn't convert..." style={{ width: '100%', padding: '11px 14px', border: '1.5px solid #DFE5ED', borderRadius: '9px', fontSize: '14px', fontFamily: 'var(--font-jakarta)', color: '#080E1C', background: '#F2F5F8', outline: 'none', resize: 'vertical' }} />
       </div>
-      <button style={{ width: '100%', padding: '13px', background: '#25B472', color: '#fff', border: 'none', borderRadius: '9px', fontSize: '15px', fontWeight: 800, fontFamily: 'var(--font-jakarta)', cursor: 'pointer' }}>Show Me What's Broken →</button>
+      <button style={{ width: '100%', padding: '13px', background: '#25B472', color: '#fff', border: 'none', borderRadius: '9px', fontSize: '15px', fontWeight: 800, fontFamily: 'var(--font-jakarta)', cursor: 'pointer' }}>Show Me What&apos;s Broken →</button>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '13px', paddingTop: '13px', borderTop: '1px solid #DFE5ED', fontSize: '11.5px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>
         {['No contracts', '24hr delivery', '90-day guarantee'].map(b => <span key={b}><span style={{ color: '#25B472', fontWeight: 800 }}>✓</span> {b}</span>)}
       </div>
@@ -49,7 +49,10 @@ function DefaultContactForm() {
   )
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const data = await sanityFetch<any>(QUERY)
+  const GHL_FORM_URL = data?.ghlFormUrl || 'https://api.aheadtech360.com/widget/form/xMYBaVwqWJaDPiPICqR4'
+
   return (
     <>
       <section style={{ background: '#fff' }}>
@@ -61,7 +64,7 @@ export default function ContactPage() {
               <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(28px,3.5vw,40px)', color: '#080E1C', marginBottom: '14px' }}>
                 Tell us about <em style={{ color: '#25B472', fontStyle: 'italic' }}>your business.</em>
               </h1>
-              <p style={{ fontSize: '15px', color: '#6E8098', lineHeight: 1.65, marginBottom: '28px', fontFamily: 'var(--font-jakarta)' }}>We'll look at your ads and your site. We'll find what's broken. We'll tell you how to fix it. Takes us 24 hours. Costs you nothing. If you like what you see, we talk. If not, you keep the report.</p>
+              <p style={{ fontSize: '15px', color: '#6E8098', lineHeight: 1.65, marginBottom: '28px', fontFamily: 'var(--font-jakarta)' }}>We&apos;ll look at your ads and your site. We&apos;ll find what&apos;s broken. We&apos;ll tell you how to fix it. Takes us 24 hours. Costs you nothing. If you like what you see, we talk. If not, you keep the report.</p>
 
               {CONTACT_ITEMS.map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '12px', marginBottom: '16px', alignItems: 'center' }}>
@@ -75,7 +78,7 @@ export default function ContactPage() {
 
               <div style={{ background: '#EDFBF3', borderRadius: '10px', padding: '16px', marginTop: '24px', borderLeft: '3px solid #25B472' }}>
                 <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#1C8F5A', marginBottom: '2px', fontFamily: 'var(--font-jakarta)' }}>How fast do you respond?</h4>
-                <p style={{ fontSize: '12px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Audits: 24 hours. Questions: same day. We don't ghost. Ever.</p>
+                <p style={{ fontSize: '12px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Audits: 24 hours. Questions: same day. We don&apos;t ghost. Ever.</p>
               </div>
             </div>
 
@@ -92,8 +95,8 @@ export default function ContactPage() {
 
       <style>{`
         @media(max-width:900px){
-          .contact-container{padding:52px 16px!important}
-          .contact-grid{grid-template-columns:1fr!important}
+          .contact-container { padding: 52px 16px !important; }
+          .contact-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>
