@@ -110,7 +110,7 @@ const DEFAULT_CASES: CaseStudy[] = [
   },
   {
     badge: 'Fashion',
-    image: 'streetwear brand.webp',
+    image: 'Streetwear-brand.webp',
     title: 'Streetwear brand: $130 AOV, 6x peak ROAS',
     description: 'Angle-first creative testing + UGC pipeline + CRO overhaul.',
     metrics: [{ value: '6x', label: 'Peak ROAS' }, { value: '$130', label: 'AOV' }],
