@@ -1,6 +1,7 @@
 import siteSettings from './siteSettings'
 import homePage from './homePage'
 import servicesPage from './servicesPage'
+import storyPage from './storyPage'
 import resultsPage from './resultsPage'
 import aboutPage from './aboutPage'
 import contactPage from './contactPage'
@@ -16,6 +17,7 @@ export const schemaTypes = [
   homePage,
   servicesPage,
   resultsPage,
+  storyPage,
   aboutPage,
   contactPage,
   blogPost,

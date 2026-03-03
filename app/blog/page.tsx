@@ -1,4 +1,6 @@
 // app/blog/page.tsx
+export const revalidate = 60
+
 import { sanityFetch } from '@/sanity/lib/client'
 import BlogCard from '@/components/sections/BlogCard'
 

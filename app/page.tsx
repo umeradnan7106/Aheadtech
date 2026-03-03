@@ -1,4 +1,6 @@
 // app/page.tsx
+export const revalidate = 60
+
 import { sanityFetch } from '@/sanity/lib/client'
 import HeroSection from '@/components/sections/HeroSection'
 import ProofBar from '@/components/sections/ProofBar'

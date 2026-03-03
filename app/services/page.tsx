@@ -1,4 +1,6 @@
 // app/services/page.tsx
+export const revalidate = 60
+
 import Image from 'next/image'
 import ServicesSection from '@/components/sections/ServicesSection'
 import GuaranteeBar from '@/components/sections/GuaranteeBar'

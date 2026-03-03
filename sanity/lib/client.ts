@@ -9,8 +9,11 @@ export const client = createClient({
 })
 
 // Helper function — pages mein import karke use karein
-export async function sanityFetch<T>(query: string, params = {}): Promise<T> {
-  return client.fetch<T>(query, params, {
-    next: { revalidate: 60 }, // 60 seconds mein fresh data
-  })
+// Note: Next.js revalidation is handled at the route level (export const revalidate = 60)
+// Do NOT pass a third argument to client.fetch — it breaks param serialization in next-sanity v12
+export async function sanityFetch<T>(
+  query: string,
+  params?: Record<string, any>
+): Promise<T> {
+  return client.fetch<T>(query, params ?? {})
 }

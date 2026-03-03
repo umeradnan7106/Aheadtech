@@ -1,4 +1,6 @@
 // app/contact/page.tsx
+export const revalidate = 60
+
 import { sanityFetch } from '@/sanity/lib/client'
 
 const QUERY = `*[_type == "contactPage"][0]{ ghlFormUrl }`

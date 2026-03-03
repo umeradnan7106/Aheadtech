@@ -1,4 +1,6 @@
 // app/about/page.tsx
+export const revalidate = 60
+
 import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/client'
 
