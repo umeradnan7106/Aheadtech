@@ -16,7 +16,7 @@ export default {
     { name: 'heroTags', title: 'Hero Industry Tags', type: 'array', of: [{ type: 'string' }] },
     { name: 'heroFormTitle', title: 'Hero Form Title', type: 'string' },
     { name: 'heroFormSubtitle', title: 'Hero Form Subtitle', type: 'string' },
-    { name: 'heroFormScarcity', title: 'Hero Form Scarcity Text (e.g. 🔥 3 spots left)', type: 'string' },
+    { name: 'heroFormScarcity', title: 'Hero Form Scarcity Text (e.g. 3 spots left)', type: 'string' },
     { name: 'heroGHLFormUrl', title: 'Hero Form — GoHighLevel Embed URL', type: 'url',
       description: 'Paste your GoHighLevel form embed URL here' },
 
@@ -63,7 +63,16 @@ export default {
     { name: 'guaranteeSubtext', title: 'Guarantee Subtext', type: 'string' },
     { name: 'guaranteePills', title: 'Guarantee Pills (3)', type: 'array',
       of: [{ type: 'object', fields: [
-        { name: 'icon', title: 'Emoji Icon', type: 'string' },
+        {
+          name: 'icon',
+          title: 'Icon Image',
+          type: 'image',
+          description: 'Upload an SVG or PNG icon (recommended: 64x64px, transparent background)',
+          options: { hotspot: false },
+          fields: [
+            { name: 'alt', title: 'Alt Text', type: 'string' },
+          ],
+        },
         { name: 'label', title: 'Label', type: 'string' },
       ]}]
     },
@@ -78,5 +87,8 @@ export default {
     { name: 'storyHeading', title: 'Story Section Heading', type: 'string' },
     { name: 'storySubtext', title: 'Story Section Subtext', type: 'text' },
     { name: 'storyGHLFormUrl', title: 'Story Form — GoHighLevel URL', type: 'url' },
+
+    // SEO
+    { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],
 }

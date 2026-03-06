@@ -1,38 +1,26 @@
 // app/about/page.tsx
 export const revalidate = 60
 
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/client'
 
 const ABOUT_QUERY = `*[_type == "aboutPage"][0]{
   heroHeading, heroParagraph1, heroParagraph2,
-  "heroImage": heroImage.asset->url
+  "heroImage": { "url": heroImage.asset->url, "alt": heroImage.alt, "caption": heroImage.caption },
+  "values": values[]{ "iconUrl": icon.asset->url, "iconAlt": icon.alt, title, description },
+  seo { metaTitle, metaDescription, keywords, "ogImageUrl": ogImage.asset->url }
 }`
 
 const TEAM_QUERY = `*[_type == "teamMember"] | order(order asc) {
   name, role,
-  "photo": photo.asset->url
+  "photo": { "url": photo.asset->url, "alt": photo.alt }
 }`
 
-const VALUES = [
-  {
-    icon: 'icons8-outcome-64.png',
-    iconBg: '#EEF2F9',
-    title: 'Outcome-obsessed',
-    description: "We track revenue, not impressions. Every decision is measured against \"Did this make the client more money?\"",
-  },
-  {
-    icon: 'icons8-test-tube-100.png',
-    iconBg: '#EDFBF3',
-    title: 'We eat our own cooking',
-    description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it.",
-  },
-  {
-    icon: 'icons8-handshake-64.png',
-    iconBg: '#FFFAEB',
-    title: 'Small team, not a factory',
-    description: "You'll know your strategist by name. We take on max 3 new clients/month.",
-  },
+const VALUES_DEFAULT = [
+  { icon: 'icons8-outcome-64.png', iconBg: '#EEF2F9', title: 'Outcome-obsessed', description: "We track revenue, not impressions. Every decision is measured against \"Did this make the client more money?\"" },
+  { icon: 'icons8-test-tube-100.png', iconBg: '#EDFBF3', title: 'We eat our own cooking', description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it." },
+  { icon: 'icons8-handshake-64.png', iconBg: '#FFFAEB', title: 'Small team, not a factory', description: "You'll know your strategist by name. We take on max 3 new clients/month." },
 ]
 
 const TEAM_FALLBACK = [
@@ -46,6 +34,27 @@ const TEAM_FALLBACK = [
   { name: '[Name]', role: 'Content Writer', photo: null },
 ]
 
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await sanityFetch<any>(ABOUT_QUERY)
+  return {
+    title: about?.seo?.metaTitle || 'About Us — AheadTech360',
+    description: about?.seo?.metaDescription || 'Small team. Big results. We\'re a performance marketing agency based in Karachi, serving US brands.',
+    keywords: about?.seo?.keywords || '',
+    openGraph: {
+      title: about?.seo?.metaTitle || 'About Us — AheadTech360',
+      description: about?.seo?.metaDescription || '',
+      url: 'https://aheadtech360.com/about',
+      siteName: 'AheadTech360',
+      images: about?.seo?.ogImageUrl ? [{ url: about.seo.ogImageUrl, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: about?.seo?.metaTitle || 'About Us — AheadTech360',
+      description: about?.seo?.metaDescription || '',
+    },
+  }
+}
+
 export default async function AboutPage() {
   const [about, team] = await Promise.all([
     sanityFetch<any>(ABOUT_QUERY),
@@ -53,6 +62,9 @@ export default async function AboutPage() {
   ])
 
   const displayTeam = team?.length ? team : TEAM_FALLBACK
+
+  // Use Sanity values if available (they'll have iconUrl), else use local defaults
+  const displayValues = about?.values?.length ? about.values : VALUES_DEFAULT
 
   return (
     <>
@@ -71,13 +83,20 @@ export default async function AboutPage() {
               {about?.heroParagraph2 || "You'll know your team by name. We answer the phone. We send real reports with real numbers. No ghosting. Ever."}
             </p>
             <div style={{ fontSize: '13px', color: '#A4B3C4', padding: '12px 16px', background: '#F2F5F8', borderRadius: '8px', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
-              📍 US: 30 N Gould St Ste N, Sheridan, WY 82801<br />
-              📧 hello@aheadtech360.com &nbsp;|&nbsp; 📞 +1 (251) 373-2311
+              US: 30 N Gould St Ste N, Sheridan, WY 82801<br />
+              hello@aheadtech360.com &nbsp;|&nbsp; +1 (251) 373-2311
             </div>
           </div>
           <div style={{ height: '320px', background: '#DFE5ED', borderRadius: '24px', overflow: 'hidden', position: 'relative' }}>
-            {about?.heroImage ? (
-              <Image src={about.heroImage} alt="Our team" fill style={{ objectFit: 'cover' }} />
+            {about?.heroImage?.url ? (
+              <>
+                <Image src={about.heroImage.url} alt={about.heroImage.alt || 'Our team'} fill style={{ objectFit: 'cover' }} unoptimized />
+                {about.heroImage.caption && (
+                  <p style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,.5)', color: '#fff', fontSize: '12px', padding: '8px 14px', fontFamily: 'var(--font-jakarta)' }}>
+                    {about.heroImage.caption}
+                  </p>
+                )}
+              </>
             ) : (
               <div style={{ display: 'grid', placeItems: 'center', height: '100%', fontSize: '12px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Real team photo</div>
             )}
@@ -93,15 +112,27 @@ export default async function AboutPage() {
             What we believe.
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="values-grid">
-            {VALUES.map((w, i) => (
-              <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
-                <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg, display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
-                  <Image src={`/images/${w.icon}`} alt={w.title} width={50} height={50} style={{ objectFit: 'contain' }} />
+            {displayValues.map((w: any, i: number) => {
+              const imgSrc = w.iconUrl || (w.icon ? `/images/${w.icon}` : null)
+              return (
+                <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
+                  <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg || '#EEF2F9', display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
+                    {imgSrc && (
+                      <Image
+                        src={imgSrc}
+                        alt={w.iconAlt || w.title || ''}
+                        width={50}
+                        height={50}
+                        style={{ objectFit: 'contain' }}
+                        unoptimized={!!w.iconUrl}
+                      />
+                    )}
+                  </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
+                  <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
-                <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -114,19 +145,23 @@ export default async function AboutPage() {
             The people who <em style={{ color: '#25B472', fontStyle: 'italic' }}>do the work.</em>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '20px' }} className="team-grid">
-            {displayTeam.map((member: any, i: number) => (
-              <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{ width: '100%', aspectRatio: '1', background: '#DFE5ED', borderRadius: '16px', display: 'grid', placeItems: 'center', overflow: 'hidden', position: 'relative', marginBottom: '10px' }}>
-                  {member.photo ? (
-                    <Image src={member.photo} alt={member.name} fill style={{ objectFit: 'cover' }} />
-                  ) : (
-                    <span style={{ fontSize: '10px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Photo</span>
-                  )}
+            {displayTeam.map((member: any, i: number) => {
+              const photoUrl = member.photo?.url || member.photo
+              const photoAlt = member.photo?.alt || member.name
+              return (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{ width: '100%', aspectRatio: '1', background: '#DFE5ED', borderRadius: '16px', display: 'grid', placeItems: 'center', overflow: 'hidden', position: 'relative', marginBottom: '10px' }}>
+                    {photoUrl ? (
+                      <Image src={photoUrl} alt={photoAlt} fill style={{ objectFit: 'cover' }} unoptimized />
+                    ) : (
+                      <span style={{ fontSize: '10px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Photo</span>
+                    )}
+                  </div>
+                  <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#080E1C', fontFamily: 'var(--font-bricolage)' }}>{member.name}</h4>
+                  <p style={{ fontSize: '12px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>{member.role}</p>
                 </div>
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#080E1C', fontFamily: 'var(--font-bricolage)' }}>{member.name}</h4>
-                <p style={{ fontSize: '12px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>{member.role}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

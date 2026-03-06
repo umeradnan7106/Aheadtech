@@ -1,11 +1,11 @@
 'use client'
 // components/sections/ServicesSection.tsx
-// Icons: public/icons/ folder mein rakhein (svg ya png)
 
 import Image from 'next/image'
 
 interface Service {
-  icon: string   // filename only — e.g. "ads.svg" — public/icons/ mein hona chahiye
+  icon?: string     // local filename — e.g. "ads.svg" — public/icons/ (fallback)
+  iconUrl?: string  // Sanity CDN URL (preferred when set)
   iconBg: string
   title: string
   description: string
@@ -37,6 +37,8 @@ function parseHeading(text: string) {
 }
 
 function ServiceCard({ service }: { service: Service }) {
+  const imgSrc = service.iconUrl || (service.icon ? `/icons/${service.icon}` : null)
+
   return (
     <div
       className="svc-card"
@@ -46,13 +48,18 @@ function ServiceCard({ service }: { service: Service }) {
     >
       {/* Icon */}
       <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: service.iconBg, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
-        <Image
-          src={`/icons/${service.icon}`}
-          alt={service.title}
-          width={40}
-          height={40}
-          style={{ objectFit: 'contain' }}
-        />
+        {imgSrc ? (
+          <Image
+            src={imgSrc}
+            alt={service.title}
+            width={40}
+            height={40}
+            style={{ objectFit: 'contain' }}
+            unoptimized={!!service.iconUrl}
+          />
+        ) : (
+          <div style={{ width: 40, height: 40 }} />
+        )}
       </div>
 
       {/* Text */}

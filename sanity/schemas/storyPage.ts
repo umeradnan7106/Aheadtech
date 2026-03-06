@@ -110,6 +110,9 @@ export default {
       type: 'url',
       description: 'The GHL embed URL for the story collection form. Paste from your GHL funnel settings.',
     },
+
+    // ── SEO ─────────────────────────────────────────────────────────────
+    { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],
 
   preview: {

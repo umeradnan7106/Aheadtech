@@ -3,8 +3,10 @@ export default {
   title: 'Site Settings',
   type: 'document',
   fields: [
-    { name: 'topbarText', title: 'Topbar Text', type: 'string',
-      description: 'E.g. "We helped 75+ brands generate $1.56M+ in revenue"' },
+    {
+      name: 'topbarText', title: 'Topbar Text', type: 'string',
+      description: 'E.g. "We helped 75+ brands generate $1.56M+ in revenue"'
+    },
     { name: 'topbarHighlights', title: 'Topbar Bold Words (comma separated)', type: 'string' },
     { name: 'logoText', title: 'Logo Text', type: 'string' },
     { name: 'phone', title: 'Phone Number', type: 'string' },
@@ -22,5 +24,11 @@ export default {
     },
     { name: 'footerTagline', title: 'Footer Tagline', type: 'string' },
     { name: 'footerCopyright', title: 'Footer Copyright Text', type: 'string' },
+    {
+      name: 'blogSidebarFormUrl',
+      title: 'Blog Sidebar GHL Form URL',
+      type: 'url',
+      description: 'This GHL form appears on the LEFT side of every blog post. Paste your GHL embed URL here.',
+    },
   ],
 }

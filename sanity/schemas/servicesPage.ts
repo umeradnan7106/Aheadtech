@@ -7,9 +7,31 @@ export default {
     { name: 'pageSubheading', title: 'Page Subheading', type: 'string' },
     { name: 'services', title: 'Services List', type: 'array',
       of: [{ type: 'object', fields: [
-        { name: 'icon', title: 'Emoji Icon', type: 'string' },
-        { name: 'iconBg', title: 'Icon Background Color (Tailwind class)', type: 'string',
-          description: 'e.g. bg-blue-bg or bg-green-bg' },
+        {
+          name: 'icon',
+          title: 'Icon Image',
+          type: 'image',
+          description: 'Upload SVG or PNG icon (64x64px recommended)',
+          options: { hotspot: false },
+          fields: [
+            { name: 'alt', title: 'Alt Text', type: 'string' },
+          ],
+        },
+        {
+          name: 'iconBg',
+          title: 'Icon Background Color',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Blue', value: '#EEF2F9' },
+              { title: 'Green', value: '#EDFBF3' },
+              { title: 'Amber', value: '#FFFAEB' },
+              { title: 'Red', value: '#FEF3F2' },
+              { title: 'Purple', value: '#F3E8FF' },
+            ],
+            layout: 'radio',
+          },
+        },
         { name: 'title', title: 'Service Title', type: 'string' },
         { name: 'description', title: 'Description', type: 'text' },
         { name: 'resultValue', title: 'Result Value (e.g. 3.2x)', type: 'string' },
@@ -19,7 +41,16 @@ export default {
     { name: 'whyUsHeading', title: 'Why Us Heading', type: 'string' },
     { name: 'whyUsCards', title: 'Why Us Cards (3)', type: 'array',
       of: [{ type: 'object', fields: [
-        { name: 'emoji', title: 'Emoji', type: 'string' },
+        {
+          name: 'icon',
+          title: 'Icon Image',
+          type: 'image',
+          description: 'Upload SVG or PNG icon (64x64px recommended)',
+          options: { hotspot: false },
+          fields: [
+            { name: 'alt', title: 'Alt Text', type: 'string' },
+          ],
+        },
         { name: 'title', title: 'Title', type: 'string' },
         { name: 'description', title: 'Description', type: 'text' },
       ]}]
@@ -27,5 +58,6 @@ export default {
     { name: 'ctaHeading', title: 'CTA Heading', type: 'string' },
     { name: 'ctaSubtext', title: 'CTA Subtext', type: 'string' },
     { name: 'ctaGHLFormUrl', title: 'CTA GoHighLevel Form URL', type: 'url' },
+    { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],
 }

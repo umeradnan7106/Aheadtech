@@ -1,6 +1,7 @@
 // app/results/[slug]/page.tsx
 export const revalidate = 60
 
+import type { Metadata } from 'next'
 import { sanityFetch } from '@/sanity/lib/client'
 import { notFound } from 'next/navigation'
 
@@ -9,8 +10,29 @@ const QUERY = `*[_type == "caseStudy" && slug.current == $slug][0]{
   metrics,
   problem,
   solution,
-  result
+  result,
+  seo { metaTitle, metaDescription, keywords, "ogImageUrl": ogImage.asset->url }
 }`
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const cs = await sanityFetch<any>(QUERY, { slug })
+  return {
+    title: cs?.seo?.metaTitle || (cs?.title ? `${cs.title} — AheadTech360` : 'Case Study — AheadTech360'),
+    description: cs?.seo?.metaDescription || '',
+    keywords: cs?.seo?.keywords || '',
+    openGraph: {
+      title: cs?.seo?.metaTitle || cs?.title || '',
+      description: cs?.seo?.metaDescription || '',
+      images: cs?.seo?.ogImageUrl ? [{ url: cs.seo.ogImageUrl }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: cs?.seo?.metaTitle || cs?.title || '',
+      description: cs?.seo?.metaDescription || '',
+    },
+  }
+}
 
 // Sanity can return Portable Text blocks OR plain strings — handle both
 function extractText(item: any): string {

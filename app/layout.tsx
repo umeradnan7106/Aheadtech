@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import Topbar from '@/components/layout/Topbar'
 import { sanityFetch } from '@/sanity/lib/client'
+import Script from 'next/script'
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -47,6 +48,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           email={settings?.email}
           address={settings?.address}
           tagline={settings?.footerTagline}
+        />
+        {/* <!-- Google tag (gtag.js) --> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBJBVXBH5F"></script>
+        <Script id="google-analytics" strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-TBJBVXBH5F');
+            `
+          }}
         />
       </body>
     </html>

@@ -6,7 +6,34 @@ export default {
     { name: 'title', title: 'Title', type: 'string' },
     { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' } },
     { name: 'badge', title: 'Industry Badge (e.g. Ecommerce)', type: 'string' },
-    { name: 'clientImage', title: 'Client Photo', type: 'image', options: { hotspot: true } },
+    {
+      name: 'clientImage',
+      title: 'Client Photo',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe the image for accessibility and SEO.',
+          validation: (R: any) => R.warning('Alt text improves SEO — please fill this in'),
+        },
+        {
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+          description: 'Optional short text shown below the image.',
+        },
+        {
+          name: 'description',
+          title: 'Description',
+          type: 'text',
+          rows: 2,
+          description: 'Longer description for context (not displayed on page).',
+        },
+      ],
+    },
     { name: 'excerpt', title: 'Short Excerpt', type: 'text' },
     { name: 'metrics', title: 'Metrics (2-4 items)', type: 'array',
       of: [{ type: 'object', fields: [
@@ -17,5 +44,6 @@ export default {
     { name: 'problem', title: 'The Problem', type: 'array', of: [{ type: 'block' }] },
     { name: 'solution', title: 'What We Did', type: 'array', of: [{ type: 'block' }] },
     { name: 'result', title: 'The Result', type: 'array', of: [{ type: 'block' }] },
+    { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],
 }

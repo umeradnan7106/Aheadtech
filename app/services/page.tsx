@@ -1,36 +1,71 @@
 // app/services/page.tsx
 export const revalidate = 60
 
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import ServicesSection from '@/components/sections/ServicesSection'
 import GuaranteeBar from '@/components/sections/GuaranteeBar'
 import { sanityFetch } from '@/sanity/lib/client'
 
-const QUERY = `*[_type == "servicesPage"][0]{ pageHeading, pageSubheading }`
+const QUERY = `*[_type == "servicesPage"][0]{
+  pageHeading, pageSubheading,
+  "services": services[]{
+    "iconUrl": icon.asset->url,
+    "iconAlt": icon.alt,
+    iconBg, title, description, resultValue, resultLabel
+  },
+  "whyUsCards": whyUsCards[]{
+    "iconUrl": icon.asset->url,
+    "iconAlt": icon.alt,
+    title, description
+  },
+  seo { metaTitle, metaDescription, keywords, "ogImageUrl": ogImage.asset->url }
+}`
 
-const WHY_US = [
-  {
-    icon: 'icons8-outcome-64.png',
-    iconBg: '#EEF2F9',
-    title: 'Outcome-obsessed',
-    description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"',
-  },
-  {
-    icon: 'icons8-test-tube-100.png',
-    iconBg: '#EDFBF3',
-    title: 'We eat our own cooking',
-    description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it.",
-  },
-  {
-    icon: 'icons8-handshake-64.png',
-    iconBg: '#FFFAEB',
-    title: 'Small team, not a factory',
-    description: "You'll know your strategist by name. We take on max 3 new clients/month.",
-  },
+const WHY_US_DEFAULT = [
+  { icon: 'icons8-outcome-64.png', iconBg: '#EEF2F9', title: 'Outcome-obsessed', description: 'We track revenue, not impressions. Every decision is measured against "Did this make the client more money?"' },
+  { icon: 'icons8-test-tube-100.png', iconBg: '#EDFBF3', title: 'We eat our own cooking', description: "We run ecommerce brands with the same strategies we use for clients. If it doesn't work for us, we don't sell it." },
+  { icon: 'icons8-handshake-64.png', iconBg: '#FFFAEB', title: 'Small team, not a factory', description: "You'll know your strategist by name. We take on max 3 new clients/month." },
 ]
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await sanityFetch<any>(QUERY)
+  return {
+    title: data?.seo?.metaTitle || 'Our Services — AheadTech360',
+    description: data?.seo?.metaDescription || 'Every service connects to one goal: more revenue per dollar you spend. Meta Ads, Google Ads, SEO, CRO, Email, Web.',
+    keywords: data?.seo?.keywords || '',
+    openGraph: {
+      title: data?.seo?.metaTitle || 'Our Services — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+      url: 'https://aheadtech360.com/services',
+      siteName: 'AheadTech360',
+      images: data?.seo?.ogImageUrl ? [{ url: data.seo.ogImageUrl, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data?.seo?.metaTitle || 'Our Services — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+    },
+  }
+}
 
 export default async function ServicesPage() {
   const data = await sanityFetch<any>(QUERY)
+
+  // Map Sanity services → ServicesSection format (iconUrl takes priority over local icon)
+  const sanityServices = data?.services?.length
+    ? data.services.map((s: any) => ({
+        iconUrl: s.iconUrl ?? undefined,
+        iconBg: s.iconBg || '#EEF2F9',
+        title: s.title || '',
+        description: s.description || '',
+        resultValue: s.resultValue || '',
+        resultLabel: s.resultLabel || '',
+      }))
+    : undefined
+
+  // Why Us cards: prefer Sanity data with iconUrl, fall back to local images
+  const whyUsCards = data?.whyUsCards?.length ? data.whyUsCards : WHY_US_DEFAULT
 
   return (
     <>
@@ -51,6 +86,7 @@ export default async function ServicesPage() {
       <ServicesSection
         heading="Everything you need. [em]Nothing you don't.[/em]"
         subheading="Six services. Each one built to grow your revenue."
+        services={sanityServices}
       />
 
       {/* Why Us */}
@@ -61,21 +97,27 @@ export default async function ServicesPage() {
             We&apos;re not like <em style={{ color: '#25B472', fontStyle: 'italic' }}>other agencies.</em>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="why-grid">
-            {WHY_US.map((w, i) => (
-              <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
-                <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg, display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
-                  <Image
-                    src={`/images/${w.icon}`}
-                    alt={w.title}
-                    width={50}
-                    height={50}
-                    style={{ objectFit: 'contain' }}
-                  />
+            {whyUsCards.map((w: any, i: number) => {
+              const imgSrc = w.iconUrl || (w.icon ? `/images/${w.icon}` : null)
+              return (
+                <div key={i} style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', padding: '28px' }}>
+                  <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: w.iconBg || '#EEF2F9', display: 'grid', placeItems: 'center', marginBottom: '14px' }}>
+                    {imgSrc && (
+                      <Image
+                        src={imgSrc}
+                        alt={w.iconAlt || w.title || ''}
+                        width={50}
+                        height={50}
+                        style={{ objectFit: 'contain' }}
+                        unoptimized={!!w.iconUrl}
+                      />
+                    )}
+                  </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
+                  <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', fontFamily: 'var(--font-bricolage)' }}>{w.title}</h3>
-                <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.6, fontFamily: 'var(--font-jakarta)' }}>{w.description}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

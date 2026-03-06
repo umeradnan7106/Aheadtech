@@ -1,4 +1,5 @@
 import siteSettings from './siteSettings'
+import seoMeta from './seoMeta'
 import homePage from './homePage'
 import servicesPage from './servicesPage'
 import storyPage from './storyPage'
@@ -14,6 +15,7 @@ import teamMember from './teamMember'
 
 export const schemaTypes = [
   siteSettings,
+  seoMeta,
   homePage,
   servicesPage,
   resultsPage,

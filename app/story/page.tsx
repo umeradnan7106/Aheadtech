@@ -117,6 +117,9 @@
 
 
 // app/story/page.tsx
+export const revalidate = 60
+
+import type { Metadata } from 'next'
 import { sanityFetch } from '@/sanity/lib/client'
 
 const QUERY = `*[_type == "storyPage"][0]{
@@ -125,8 +128,30 @@ const QUERY = `*[_type == "storyPage"][0]{
   foundersQuote, foundersNames,
   storiesCount,
   formHeading, formSubheading,
-  ghlFormUrl
+  ghlFormUrl,
+  seo { metaTitle, metaDescription, keywords, "ogImageUrl": ogImage.asset->url }
 }`
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await sanityFetch<any>(QUERY)
+  return {
+    title: data?.seo?.metaTitle || 'Share Your Story — AheadTech360',
+    description: data?.seo?.metaDescription || "We're collecting real stories from real business owners. Share yours and get a free personalized tip.",
+    keywords: data?.seo?.keywords || '',
+    openGraph: {
+      title: data?.seo?.metaTitle || 'Share Your Story — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+      url: 'https://aheadtech360.com/story',
+      siteName: 'AheadTech360',
+      images: data?.seo?.ogImageUrl ? [{ url: data.seo.ogImageUrl, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data?.seo?.metaTitle || 'Share Your Story — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+    },
+  }
+}
 
 const DEFAULT_STEPS = [
   { number: '1', title: 'We read it personally',  description: 'Not a bot. Iqrar or Ikrash read every story within 48 hours.',                               color: '#EDFBF3' },

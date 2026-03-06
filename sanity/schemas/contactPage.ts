@@ -17,5 +17,6 @@ export default {
       description: 'Paste your GHL form URL here. Non-technical user just updates this URL.' },
     { name: 'trustBadges', title: 'Trust Badges (below form)', type: 'array',
       of: [{ type: 'string' }] },
+    { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],
 }

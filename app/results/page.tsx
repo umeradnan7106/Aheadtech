@@ -8,7 +8,8 @@ import Image from 'next/image'
 const QUERY = `*[_type == "caseStudy"] | order(_createdAt asc) {
   "slug": slug.current,
   badge, title, excerpt,
-  "image": clientImage.asset->url,
+  "imageUrl": clientImage.asset->url,
+  "imageAlt": clientImage.alt,
   metrics
 }`
 
@@ -61,8 +62,8 @@ export default async function ResultsPage() {
                 style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '16px', overflow: 'hidden', display: 'grid', gridTemplateColumns: '220px 1fr', transition: 'all 0.3s', textDecoration: 'none' }}
                 className="case-card-link">
                 <div style={{ position: 'relative', background: '#DFE5ED', minHeight: '140px' }}>
-                  {cs.image ? (
-                    <Image src={cs.image} alt={cs.title} fill style={{ objectFit: 'cover' }} />
+                  {cs.imageUrl ? (
+                    <Image src={cs.imageUrl} alt={cs.imageAlt || cs.title} fill style={{ objectFit: 'cover' }} unoptimized />
                   ) : (
                     <div style={{ display: 'grid', placeItems: 'center', height: '100%', fontSize: '11px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Client photo</div>
                   )}

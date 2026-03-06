@@ -1,9 +1,13 @@
 // app/contact/page.tsx
 export const revalidate = 60
 
+import type { Metadata } from 'next'
 import { sanityFetch } from '@/sanity/lib/client'
 
-const QUERY = `*[_type == "contactPage"][0]{ ghlFormUrl }`
+const QUERY = `*[_type == "contactPage"][0]{
+  ghlFormUrl,
+  seo { metaTitle, metaDescription, keywords, "ogImageUrl": ogImage.asset->url }
+}`
 
 const CONTACT_ITEMS = [
   { icon: '📞', title: 'Call us', detail: '+1 (251) 373-2311' },
@@ -12,10 +16,31 @@ const CONTACT_ITEMS = [
   { icon: '📍', title: 'Office', detail: '30 N Gould St Ste N, Sheridan, WY 82801' },
 ]
 
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await sanityFetch<any>(QUERY)
+  return {
+    title: data?.seo?.metaTitle || 'Free Audit — AheadTech360',
+    description: data?.seo?.metaDescription || 'Get a free marketing audit. We find what\'s broken and tell you how to fix it. No contracts. 24-hour delivery.',
+    keywords: data?.seo?.keywords || '',
+    openGraph: {
+      title: data?.seo?.metaTitle || 'Free Audit — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+      url: 'https://aheadtech360.com/contact',
+      siteName: 'AheadTech360',
+      images: data?.seo?.ogImageUrl ? [{ url: data.seo.ogImageUrl, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data?.seo?.metaTitle || 'Free Audit — AheadTech360',
+      description: data?.seo?.metaDescription || '',
+    },
+  }
+}
+
 function DefaultContactForm() {
   return (
     <div style={{ background: '#fff', borderRadius: '24px', padding: '30px', boxShadow: '0 20px 50px rgba(8,14,28,.15)', border: '1px solid #DFE5ED' }}>
-      <div style={{ background: '#FEF3F2', borderRadius: '7px', padding: '8px 14px', marginBottom: '18px', fontSize: '12px', color: '#F04438', fontWeight: 700, textAlign: 'center', fontFamily: 'var(--font-jakarta)' }}>🔥 2 spots left this month</div>
+      <div style={{ background: '#FEF3F2', borderRadius: '7px', padding: '8px 14px', marginBottom: '18px', fontSize: '12px', color: '#F04438', fontWeight: 700, textAlign: 'center', fontFamily: 'var(--font-jakarta)' }}>2 spots left this month</div>
       <h3 style={{ fontSize: '19px', fontWeight: 800, color: '#080E1C', marginBottom: '3px', textAlign: 'center', fontFamily: 'var(--font-bricolage)' }}>Get your free audit</h3>
       <p style={{ fontSize: '13px', color: '#6E8098', marginBottom: '20px', textAlign: 'center', fontFamily: 'var(--font-jakarta)', lineHeight: 1.55 }}>We find problems. You keep the report. No strings.</p>
       {[
