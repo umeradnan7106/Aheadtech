@@ -30,14 +30,14 @@ export default function BlogCard({ slug, category, title, excerpt, image }: Blog
           el.style.boxShadow = 'none'
           el.style.transform = 'translateY(0)'
         }}>
-        <div style={{ height: '170px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ height: '250px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
           {image ? (
             <Image src={image} alt={title} fill style={{ objectFit: 'cover' }} />
           ) : (
             <div style={{ display: 'grid', placeItems: 'center', height: '100%', fontSize: '10px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Blog image</div>
           )}
         </div>
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '20px' }}>``
           <div style={{ fontSize: '10px', fontWeight: 800, color: CAT_COLORS[category] || '#213D79', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontFamily: 'var(--font-jetbrains)' }}>{category}</div>
           <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', lineHeight: 1.4, fontFamily: 'var(--font-bricolage)' }}>{title}</h3>
           <p style={{ fontSize: '12.5px', color: '#6E8098', lineHeight: 1.5, fontFamily: 'var(--font-jakarta)' }}>{excerpt}</p>

@@ -98,6 +98,60 @@ export default {
             ],
           },
         },
+        // Inline CTA box block
+        {
+          type: 'object',
+          name: 'ctaBox',
+          title: 'CTA Box',
+          fields: [
+            {
+              name: 'heading',
+              title: 'Heading',
+              type: 'string',
+              initialValue: 'Want us to look at your ads?',
+            },
+            {
+              name: 'subtext',
+              title: 'Subtext',
+              type: 'string',
+              initialValue: "Free audit. No contracts. We find what's broken and tell you how to fix it in 24 hours.",
+            },
+            {
+              name: 'buttonText',
+              title: 'Button Text',
+              type: 'string',
+              initialValue: 'Get My Free Audit →',
+            },
+            {
+              name: 'buttonUrl',
+              title: 'Button URL',
+              type: 'string',
+              initialValue: '/contact',
+            },
+            {
+              name: 'theme',
+              title: 'Theme',
+              type: 'string',
+              initialValue: 'green',
+              options: {
+                list: [
+                  { title: 'Green (default)', value: 'green' },
+                  { title: 'Dark', value: 'dark' },
+                  { title: 'Blue', value: 'blue' },
+                ],
+                layout: 'radio',
+              },
+            },
+          ],
+          preview: {
+            select: { title: 'heading', subtitle: 'theme' },
+            prepare: ({ title, subtitle }: any) => ({
+              title: title || 'CTA Box',
+              subtitle: `Theme: ${subtitle || 'green'}`,
+            }),
+          },
+        },
+
         // Inline image block
         {
           type: 'image',

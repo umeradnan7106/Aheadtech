@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { sanityFetch } from '@/sanity/lib/client'
 import FAQAccordion from '@/components/blog/FAQAccordion'
+import CTABox from '@/components/blog/CTABox'
 
 // ── Queries ────────────────────────────────────────────────────────────
 
@@ -77,6 +78,19 @@ function RenderBody({ body }: { body: any[] }) {
           )
         }
 
+        if (block._type === 'ctaBox') {
+          return (
+            <CTABox
+              key={i}
+              heading={block.heading}
+              subtext={block.subtext}
+              buttonText={block.buttonText}
+              buttonUrl={block.buttonUrl}
+              theme={block.theme}
+            />
+          )
+        }
+
         if (block._type !== 'block') return null
 
         const html = block.children?.map((child: any) => {
@@ -95,7 +109,7 @@ function RenderBody({ body }: { body: any[] }) {
           <blockquote key={i} style={{ ...base, borderLeft: '4px solid #25B472', paddingLeft: '20px', margin: '28px 0', fontStyle: 'italic', color: '#6E8098', fontSize: '16px' }}
             dangerouslySetInnerHTML={{ __html: html }} />
         )
-        return <p key={i} style={{ ...base, fontSize: '15px', color: '#374151', marginBottom: '16px' }} dangerouslySetInnerHTML={{ __html: html }} />
+        return <p key={i} style={{ ...base, fontSize: '18px', color: '#374151', marginBottom: '16px' }} dangerouslySetInnerHTML={{ __html: html }} />
       })}
     </>
   )
@@ -152,10 +166,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           SECTION 1: Main Article
       ════════════════════════════════════════════════════════ */}
       <section style={{ background: '#fff', padding: '60px 32px 80px' }}>
-        <div style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '30% 1fr', gap: '48px', alignItems: 'start' }} className="blog-post-grid">
+        <div style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr', gap: '48px', alignItems: 'start' }} className="blog-post-grid">
 
           {/* ── LEFT: Sticky GHL Form ── */}
-          <div style={{ position: 'sticky', top: '100px' }}>
+          {/* <div style={{ position: 'sticky', top: '100px' }}>
             <div style={{ background: '#fff', border: '1.5px solid #DFE5ED', borderRadius: '20px', padding: '28px', boxShadow: '0 12px 40px rgba(8,14,28,.08)' }}>
               <h3 style={{ fontFamily: 'var(--font-bricolage)', fontSize: '18px', fontWeight: 800, color: '#080E1C', marginBottom: '6px', textAlign: 'center' }}>
                 Get a Free Audit
@@ -177,7 +191,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* ── RIGHT: Article Content ── */}
           <div>
@@ -247,6 +261,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <div style={{ maxWidth: '680px' }}>
               <RenderBody body={post.body} />
+
+              {/* Auto CTA box — always shown at the end of every post */}
+              <CTABox theme="dark" />
             </div>
           </div>
 
@@ -290,7 +307,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 return (
                   <Link key={i} href={`/blog/${p.slug}`} style={{ textDecoration: 'none' }} className="latest-card">
                     <div style={{ background: '#fff', border: '1px solid #DFE5ED', borderRadius: '16px', overflow: 'hidden' }}>
-                      <div style={{ height: '160px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
+                      <div style={{ height: '250px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
                         {p.image?.url
                           ? <Image src={p.image.url} alt={p.image.alt || p.title} fill style={{ objectFit: 'cover' }} unoptimized />
                           : <div style={{ display: 'grid', placeItems: 'center', height: '100%', fontSize: '11px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>No image</div>

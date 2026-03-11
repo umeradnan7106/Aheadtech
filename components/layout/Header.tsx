@@ -9,10 +9,11 @@ import Image from 'next/image'
 interface NavLink { label: string; href: string }
 
 const DEFAULT_NAV_LINKS: NavLink[] = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
   { label: 'Results', href: '/results' },
   { label: 'Share Your Story', href: '/story' },
-  { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
   { label: 'Resources', href: '/resources' },
 ]
