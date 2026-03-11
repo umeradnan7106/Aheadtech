@@ -11,9 +11,9 @@ const QUERY = `*[_type == "contactPage"][0]{
 
 const CONTACT_ITEMS = [
   { icon: '📞', title: 'Call us', detail: '+1 (251) 373-2311' },
-  { icon: '📧', title: 'Email us', detail: 'hello@aheadtech360.com' },
+  { icon: '📧', title: 'Email us', detail: 'info@aheadtech360.com' },
   { icon: '💬', title: 'WhatsApp', detail: 'Message anytime. We reply fast.' },
-  { icon: '📍', title: 'Office', detail: '30 N Gould St Ste N, Sheridan, WY 82801' },
+  // { icon: '📍', title: 'Office', detail: '30 N Gould St Ste N, Sheridan, WY 82801' },
 ]
 
 export async function generateMetadata(): Promise<Metadata> {

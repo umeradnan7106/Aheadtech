@@ -83,8 +83,7 @@ export default async function AboutPage() {
               {about?.heroParagraph2 || "You'll know your team by name. We answer the phone. We send real reports with real numbers. No ghosting. Ever."}
             </p>
             <div style={{ fontSize: '13px', color: '#A4B3C4', padding: '12px 16px', background: '#F2F5F8', borderRadius: '8px', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
-              US: 30 N Gould St Ste N, Sheridan, WY 82801<br />
-              hello@aheadtech360.com &nbsp;|&nbsp; +1 (251) 373-2311
+              info@aheadtech360.com &nbsp;|&nbsp; +1 (251) 373-2311
             </div>
           </div>
           <div style={{ height: '320px', background: '#DFE5ED', borderRadius: '24px', overflow: 'hidden', position: 'relative' }}>

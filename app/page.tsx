@@ -33,7 +33,7 @@ const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(_createdAt asc) {
 const CASES_QUERY = `*[_type == "caseStudy"] | order(_createdAt asc)[0...4] {
   badge, title,
   "slug": slug.current,
-  "image": { "url": clientImage.asset->url, "alt": clientImage.alt },
+  "image": { "url": image.asset->url, "alt": image.alt },
   metrics
 }`
 

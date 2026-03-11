@@ -11,8 +11,8 @@ interface FooterProps {
 
 export default function Footer({
   phone = '+1 (251) 373-2311',
-  email = 'hello@aheadtech360.com',
-  address = '30 N Gould St Ste N, Sheridan, WY 82801',
+  email = 'info@aheadtech360.com',
+  // address = '30 N Gould St Ste N, Sheridan, WY 82801',
   tagline = 'We help small businesses make more money from their marketing. Simple as that.',
 }: FooterProps) {
   return (
@@ -36,7 +36,7 @@ export default function Footer({
           <p style={{ fontSize: '13px', color: '#6E8098', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
             📞 {phone}<br />
             📧 {email}<br />
-            📍 {address}
+            {/* 📍 {address} */}
           </p>
         </div>
 
