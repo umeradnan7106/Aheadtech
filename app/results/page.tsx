@@ -52,7 +52,7 @@ export default async function ResultsPage() {
               <Link key={i} href={`/results/${cs.slug}`} className="hub-card-link">
                 <div className="hub-card">
                   {/* Image with overlay metrics */}
-                  <div style={{ height: '300px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ height: '250px', background: '#DFE5ED', position: 'relative', overflow: 'hidden' }}>
                     {cs.image
                       ? <Image src={cs.image} alt={cs.title} fill style={{ objectFit: 'cover' }} unoptimized />
                       : <div style={{ display: 'grid', placeItems: 'center', height: '100%', fontSize: '11px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Client image</div>
@@ -109,7 +109,7 @@ export default async function ResultsPage() {
       <style>{`
         .hub-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 20px;
         }
         .hub-card-link {
