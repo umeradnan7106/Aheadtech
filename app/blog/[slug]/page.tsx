@@ -91,6 +91,62 @@ function RenderBody({ body }: { body: any[] }) {
           )
         }
 
+        if (block._type === 'table') {
+          const headers: string[] = block.headers || []
+          const rows: any[] = block.rows || []
+          return (
+            <div key={i} style={{ overflowX: 'auto', margin: '28px 0' }}>
+              {block.caption && (
+                <p style={{ fontSize: '12px', color: '#6E8098', marginBottom: '8px', fontFamily: 'var(--font-jakarta)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
+                  {block.caption}
+                </p>
+              )}
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', fontFamily: 'var(--font-jakarta)' }}>
+                <thead>
+                  <tr>
+                    {headers.map((h: string, j: number) => (
+                      <th key={j} style={{
+                        background: '#080E1C',
+                        color: '#fff',
+                        padding: '12px 16px',
+                        textAlign: 'left',
+                        fontWeight: 700,
+                        fontSize: '13px',
+                        borderRight: j < headers.length - 1 ? '1px solid rgba(255,255,255,.1)' : 'none',
+                      }}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((row: any, j: number) => {
+                    const cells = [row.col1, row.col2, row.col3, row.col4, row.col5].filter(c => c !== undefined && c !== null && c !== '')
+                    const isEven = j % 2 === 0
+                    return (
+                      <tr key={j} style={{ background: isEven ? '#F2F5F8' : '#fff' }}>
+                        {cells.map((cell: string, k: number) => (
+                          <td key={k} style={{
+                            padding: '11px 16px',
+                            borderBottom: '1px solid #DFE5ED',
+                            borderRight: k < cells.length - 1 ? '1px solid #DFE5ED' : 'none',
+                            color: k === 0 && row.firstCellBold !== false ? '#213D79' : '#374151',
+                            fontWeight: k === 0 && row.firstCellBold !== false ? 700 : 400,
+                            verticalAlign: 'top',
+                            lineHeight: 1.5,
+                          }}>
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )
+        }
+
         if (block._type !== 'block') return null
 
         const html = block.children?.map((child: any) => {

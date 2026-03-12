@@ -152,6 +152,64 @@ export default {
           },
         },
 
+        // Table block
+        {
+          type: 'object',
+          name: 'table',
+          title: 'Table',
+          fields: [
+            {
+              name: 'caption',
+              title: 'Table Caption (optional)',
+              type: 'string',
+              description: 'Short label shown above the table',
+            },
+            {
+              name: 'headers',
+              title: 'Column Headers',
+              type: 'array',
+              of: [{ type: 'string' }],
+              description: 'E.g. ["", "Local SEO", "Regular SEO"]  — leave first cell empty for row-label tables',
+              validation: (R: any) => R.required().min(1),
+            },
+            {
+              name: 'rows',
+              title: 'Rows',
+              type: 'array',
+              of: [{
+                type: 'object',
+                name: 'tableRow',
+                title: 'Row',
+                fields: [
+                  { name: 'col1', title: 'Column 1', type: 'string' },
+                  { name: 'col2', title: 'Column 2', type: 'string' },
+                  { name: 'col3', title: 'Column 3', type: 'string' },
+                  { name: 'col4', title: 'Column 4 (optional)', type: 'string' },
+                  { name: 'col5', title: 'Column 5 (optional)', type: 'string' },
+                  {
+                    name: 'firstCellBold',
+                    title: 'Bold first cell?',
+                    type: 'boolean',
+                    description: 'Make the first column cell bold (for row labels like "Target", "Goal" etc.)',
+                    initialValue: true,
+                  },
+                ],
+                preview: {
+                  select: { title: 'col1', subtitle: 'col2' },
+                },
+              }],
+              validation: (R: any) => R.required().min(1),
+            },
+          ],
+          preview: {
+            select: { title: 'caption', subtitle: 'headers' },
+            prepare: ({ title, subtitle }: any) => ({
+              title: `📊 Table${title ? ': ' + title : ''}`,
+              subtitle: subtitle ? subtitle.join(' | ') : '',
+            }),
+          },
+        },
+
         // Inline image block
         {
           type: 'image',
