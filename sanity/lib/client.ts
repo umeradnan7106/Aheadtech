@@ -15,5 +15,9 @@ export async function sanityFetch<T>(
   query: string,
   params?: Record<string, any>
 ): Promise<T> {
-  return client.fetch<T>(query, params ?? {})
+  // params wali queries (slug) ke liye direct client.fetch
+  // baki ke liye no-store taake live site hamesha fresh data dikhaaye
+  return client.fetch<T>(query, params ?? {}, {
+    cache: 'no-store',   // ← yeh add karo
+  })
 }
