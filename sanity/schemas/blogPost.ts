@@ -24,8 +24,12 @@ export default {
       description: 'E.g. "Digital Marketing", "Meta Ads", "CRO"',
       options: {
         list: [
-          'Meta Ads', 'Google Ads', 'CRO', 'Tracking',
-          'Email', 'Strategy', 'Digital Marketing', 'SEO', 'Web Design',
+          { title: 'SEO', value: 'SEO' },
+          { title: 'Paid Ads', value: 'Paid Ads' },
+          { title: 'Google Ads', value: 'Google Ads' },
+          { title: 'Development', value: 'Development' },
+          { title: 'Email Marketing', value: 'Email Marketing' },
+          { title: 'Social Media', value: 'Social Media' },
         ],
       },
     },
