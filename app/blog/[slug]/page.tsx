@@ -263,7 +263,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <RenderBody body={post.body} />
 
               {/* Auto CTA box — always shown at the end of every post */}
-              <CTABox theme="dark" />
+              {/* <CTABox theme="dark" /> */}
             </div>
           </div>
 
