@@ -423,7 +423,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <hr style={{ border: 'none', borderTop: '1.5px solid #DFE5ED', marginBottom: '32px' }} />
 
-            <div style={{ maxWidth: '680px' }}>
+            <div style={{ maxWidth: '950px' }}>
               <RenderBody body={post.body} />
 
               {/* Auto CTA box — always shown at the end of every post */}
