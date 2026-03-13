@@ -122,9 +122,8 @@ function RenderBody({ body }: { body: any[] }) {
           return (
             <div key={i} style={{ background: '#EFF6FF', border: '1.5px solid #BFDBFE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <span style={{ fontSize: '18px' }}>💡</span>
                 <strong style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 800, color: '#1E40AF' }}>
-                  {block.label || 'AheadTech360 Insight'}
+                  {block.label || ''}
                 </strong>
               </div>
               <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#1E3A5F', lineHeight: 1.7, margin: 0 }}>

@@ -281,8 +281,6 @@ export default {
               name: 'label',
               title: 'Label',
               type: 'string',
-              // initialValue: 'AheadTech360 Insight',
-              description: 'Bold label at top (default: AheadTech360 Insight)',
             },
             {
               name: 'text',
