@@ -241,11 +241,25 @@ export default {
               description: 'Shown in italic below the heading',
             },
             {
-              name: 'bullets',
-              title: 'Bullet Points',
+              name: 'content',
+              title: 'Content (text + bullets)',
               type: 'array',
-              of: [{ type: 'string' }],
-              description: 'Each item becomes one bullet point',
+              of: [
+                {
+                  type: 'object',
+                  name: 'paragraph',
+                  title: 'Paragraph',
+                  fields: [{ name: 'text', title: 'Text', type: 'text', rows: 2 }],
+                  preview: { select: { title: 'text' }, prepare: ({ title }: any) => ({ title: '¶ ' + title?.slice(0, 60) }) },
+                },
+                {
+                  type: 'object',
+                  name: 'bulletList',
+                  title: 'Bullet Points',
+                  fields: [{ name: 'items', title: 'Items', type: 'array', of: [{ type: 'string' }] }],
+                  preview: { select: { title: 'items' }, prepare: ({ title }: any) => ({ title: '• ' + title?.join(', ')?.slice(0, 60) }) },
+                },
+              ],
             },
           ],
           preview: {
@@ -267,7 +281,7 @@ export default {
               name: 'label',
               title: 'Label',
               type: 'string',
-              initialValue: 'AheadTech360 Insight',
+              // initialValue: 'AheadTech360 Insight',
               description: 'Bold label at top (default: AheadTech360 Insight)',
             },
             {
@@ -281,7 +295,7 @@ export default {
           preview: {
             select: { title: 'label', subtitle: 'text' },
             prepare: ({ title, subtitle }: any) => ({
-              title: `💡 Insight: ${title || ''}`,
+              title: `${title || ''}`,
               subtitle: subtitle ? subtitle.slice(0, 60) + '...' : '',
             }),
           },
