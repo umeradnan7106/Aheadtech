@@ -248,9 +248,63 @@ export default {
                 {
                   type: 'object',
                   name: 'paragraph',
-                  title: 'Paragraph',
-                  fields: [{ name: 'text', title: 'Text', type: 'text', rows: 2 }],
-                  preview: { select: { title: 'text' }, prepare: ({ title }: any) => ({ title: '¶ ' + title?.slice(0, 60) }) },
+                  title: 'Rich Text',
+                  fields: [
+                    {
+                      name: 'body',
+                      title: 'Text',
+                      type: 'array',
+                      of: [
+                        {
+                          type: 'block',
+                          styles: [{ title: 'Normal', value: 'normal' }],
+                          lists: [
+                            { title: 'Bullet', value: 'bullet' },
+                            { title: 'Numbered', value: 'number' },
+                          ],
+                          marks: {
+                            decorators: [
+                              { title: 'Bold', value: 'strong' },
+                              { title: 'Italic', value: 'em' },
+                            ],
+                            annotations: [
+                              {
+                                name: 'textColor',
+                                title: 'Text Color',
+                                type: 'object',
+                                fields: [
+                                  {
+                                    name: 'color',
+                                    title: 'Color',
+                                    type: 'string',
+                                    options: {
+                                      list: [
+                                        { title: 'Default (dark gray)', value: '#374151' },
+                                        { title: 'Blue', value: '#1E40AF' },
+                                        { title: 'Purple', value: '#6B21A8' },
+                                        { title: 'Green', value: '#1C8F5A' },
+                                        { title: 'Red', value: '#DC2626' },
+                                        { title: 'Orange', value: '#D97706' },
+                                        { title: 'Light gray', value: '#6E8098' },
+                                      ],
+                                      layout: 'dropdown',
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                  preview: {
+                    select: { title: 'body' },
+                    prepare: ({ title }: any) => ({
+                      title: '¶ Rich Text Block',
+                      subtitle: title?.[0]?.children?.[0]?.text?.slice(0, 60) || '',
+                    }),
+                  },
                 },
                 {
                   type: 'object',

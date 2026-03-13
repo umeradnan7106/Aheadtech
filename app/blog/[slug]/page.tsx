@@ -101,6 +101,69 @@ function RenderBody({ body }: { body: any[] }) {
         }
 
         if (block._type === 'infoBox') {
+          const renderInfoBodyBlock = (bodyBlock: any, idx: number) => {
+            if (bodyBlock._type !== 'block') return null
+            const renderChild = (child: any, ci: number) => {
+              let content: React.ReactNode = child.text
+              const marks = child.marks || []
+              const colorMark = marks.find((m: string) =>
+                bodyBlock.markDefs?.find((def: any) => def._key === m && def._type === 'textColor')
+              )
+              const colorDef = colorMark
+                ? bodyBlock.markDefs?.find((def: any) => def._key === colorMark)
+                : null
+              if (colorDef) content = <span key={ci} style={{ color: colorDef.color }}>{content}</span>
+              if (marks.includes('strong')) content = <strong key={ci} style={{ fontWeight: 800 }}>{content}</strong>
+              if (marks.includes('em')) content = <em key={ci}>{content}</em>
+              return <span key={ci}>{content}</span>
+            }
+            const children = bodyBlock.children?.map(renderChild)
+            if (bodyBlock.listItem === 'bullet') {
+              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
+            }
+            if (bodyBlock.listItem === 'number') {
+              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
+            }
+            return <p key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, margin: '0 0 8px 0' }}>{children}</p>
+          }
+
+          const renderInfoContent = (item: any, j: number) => {
+            if (item._type === 'paragraph') {
+              const body = item.body || []
+              const rendered: React.ReactNode[] = []
+              let i2 = 0
+              while (i2 < body.length) {
+                const b = body[i2]
+                if (b.listItem === 'bullet') {
+                  const items = []
+                  while (i2 < body.length && body[i2].listItem === 'bullet') {
+                    items.push(renderInfoBodyBlock(body[i2], i2)); i2++
+                  }
+                  rendered.push(<ul key={`ul-${i2}`} style={{ margin: '0 0 8px 0', paddingLeft: '20px' }}>{items}</ul>)
+                } else if (b.listItem === 'number') {
+                  const items = []
+                  while (i2 < body.length && body[i2].listItem === 'number') {
+                    items.push(renderInfoBodyBlock(body[i2], i2)); i2++
+                  }
+                  rendered.push(<ol key={`ol-${i2}`} style={{ margin: '0 0 8px 0', paddingLeft: '20px' }}>{items}</ol>)
+                } else {
+                  rendered.push(renderInfoBodyBlock(b, i2)); i2++
+                }
+              }
+              return <div key={j}>{rendered}</div>
+            }
+            if (item._type === 'bulletList') {
+              return (
+                <ul key={j} style={{ margin: '0 0 8px 0', paddingLeft: '20px' }}>
+                  {(item.items || []).map((b: string, k: number) => (
+                    <li key={k} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{b}</li>
+                  ))}
+                </ul>
+              )
+            }
+            return null
+          }
+
           return (
             <div key={i} style={{ background: '#FAF5FF', border: '1.5px solid #D8B4FE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
@@ -114,14 +177,8 @@ function RenderBody({ body }: { body: any[] }) {
                   {block.subtitle}
                 </p>
               )}
-              {block.bullets?.length > 0 && (
-                <ul style={{ margin: 0, paddingLeft: '20px' }}>
-                  {block.bullets.map((b: string, j: number) => (
-                    <li key={j} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
+              {block.content?.length > 0 && (
+                <div>{block.content.map(renderInfoContent)}</div>
               )}
             </div>
           )
