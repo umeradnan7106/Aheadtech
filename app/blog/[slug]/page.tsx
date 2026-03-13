@@ -91,6 +91,49 @@ function RenderBody({ body }: { body: any[] }) {
           )
         }
 
+        if (block._type === 'infoBox') {
+          return (
+            <div key={i} style={{ background: '#FAF5FF', border: '1.5px solid #D8B4FE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                {block.emoji && <span style={{ fontSize: '20px' }}>{block.emoji}</span>}
+                <h4 style={{ fontFamily: 'var(--font-bricolage)', fontSize: '16px', fontWeight: 800, color: '#4B0082', margin: 0 }}>
+                  {block.heading}
+                </h4>
+              </div>
+              {block.subtitle && (
+                <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#6B21A8', fontStyle: 'italic', fontWeight: 600, margin: '0 0 12px 0' }}>
+                  {block.subtitle}
+                </p>
+              )}
+              {block.bullets?.length > 0 && (
+                <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                  {block.bullets.map((b: string, j: number) => (
+                    <li key={j} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )
+        }
+
+        if (block._type === 'insightBox') {
+          return (
+            <div key={i} style={{ background: '#EFF6FF', border: '1.5px solid #BFDBFE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <span style={{ fontSize: '18px' }}>💡</span>
+                <strong style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 800, color: '#1E40AF' }}>
+                  {block.label || 'AheadTech360 Insight'}
+                </strong>
+              </div>
+              <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#1E3A5F', lineHeight: 1.7, margin: 0 }}>
+                {block.text}
+              </p>
+            </div>
+          )
+        }
+
         if (block._type === 'table') {
           const headers: string[] = block.headers || []
           const rows: any[] = block.rows || []

@@ -10,6 +10,7 @@ const FIXED_CATEGORIES = [
   'SEO',
   'Paid Ads',
   'Google Ads',
+  'Meta Ads',
   'Development',
   'Email Marketing',
   'Social Media',

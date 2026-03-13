@@ -27,6 +27,7 @@ export default {
           { title: 'SEO', value: 'SEO' },
           { title: 'Paid Ads', value: 'Paid Ads' },
           { title: 'Google Ads', value: 'Google Ads' },
+          { title: 'Meta Ads', value: 'Meta Ads' },
           { title: 'Development', value: 'Development' },
           { title: 'Email Marketing', value: 'Email Marketing' },
           { title: 'Social Media', value: 'Social Media' },
@@ -210,6 +211,78 @@ export default {
             prepare: ({ title, subtitle }: any) => ({
               title: `📊 Table${title ? ': ' + title : ''}`,
               subtitle: subtitle ? subtitle.join(' | ') : '',
+            }),
+          },
+        },
+
+        // Info Box block
+        {
+          type: 'object',
+          name: 'infoBox',
+          title: 'Info Box',
+          fields: [
+            {
+              name: 'emoji',
+              title: 'Emoji Icon',
+              type: 'string',
+              description: 'E.g. 🔵 📘 ✅',
+              initialValue: '📘',
+            },
+            {
+              name: 'heading',
+              title: 'Heading',
+              type: 'string',
+              validation: (R: any) => R.required(),
+            },
+            {
+              name: 'subtitle',
+              title: 'Italic Subtitle (optional)',
+              type: 'string',
+              description: 'Shown in italic below the heading',
+            },
+            {
+              name: 'bullets',
+              title: 'Bullet Points',
+              type: 'array',
+              of: [{ type: 'string' }],
+              description: 'Each item becomes one bullet point',
+            },
+          ],
+          preview: {
+            select: { title: 'heading', subtitle: 'subtitle' },
+            prepare: ({ title, subtitle }: any) => ({
+              title: `📦 Info Box: ${title || ''}`,
+              subtitle: subtitle || '',
+            }),
+          },
+        },
+
+        // Insight Box block
+        {
+          type: 'object',
+          name: 'insightBox',
+          title: 'Insight Box',
+          fields: [
+            {
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              initialValue: 'AheadTech360 Insight',
+              description: 'Bold label at top (default: AheadTech360 Insight)',
+            },
+            {
+              name: 'text',
+              title: 'Insight Text',
+              type: 'text',
+              rows: 3,
+              validation: (R: any) => R.required(),
+            },
+          ],
+          preview: {
+            select: { title: 'label', subtitle: 'text' },
+            prepare: ({ title, subtitle }: any) => ({
+              title: `💡 Insight: ${title || ''}`,
+              subtitle: subtitle ? subtitle.slice(0, 60) + '...' : '',
             }),
           },
         },
