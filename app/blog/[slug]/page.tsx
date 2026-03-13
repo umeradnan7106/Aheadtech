@@ -67,13 +67,22 @@ function RenderBody({ body }: { body: any[] }) {
   return (
     <>
       {body.map((block: any, i: number) => {
-        if (block._type === 'image' && block.url) {
+        if (block._type === 'image') {
           return (
-            <div key={i} style={{ margin: '32px 0', borderRadius: '12px', overflow: 'hidden', position: 'relative', width: '100%', aspectRatio: '16/9' }}>
-              <Image src={block.url} alt={block.alt || block.caption || 'Blog image'} fill style={{ objectFit: 'cover' }} unoptimized />
-              {block.caption && (
-                <p style={{ fontSize: '12px', color: '#6E8098', textAlign: 'center', marginTop: '8px', fontFamily: 'var(--font-jakarta)', fontStyle: 'italic' }}>{block.caption}</p>
-              )}
+            <div key={i} style={{ margin: '24px 0' }}>
+              <Image
+                src={block.url}
+                alt={block.alt || ''}
+                width={800}
+                height={500}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '10px',
+                  display: 'block',
+                }}
+                unoptimized
+              />
             </div>
           )
         }
