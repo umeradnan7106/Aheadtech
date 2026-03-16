@@ -102,10 +102,10 @@ export default async function CaseStudyPage({
             )}
           </div>
 
-          <div style={{ background: '#1A2540', borderRadius: '16px', minHeight: '260px', overflow: 'hidden', position: 'relative', border: '1px solid rgba(255,255,255,.04)' }}>
+          <div style={{ background: '#1A2540', borderRadius: '16px', minHeight: '360px', overflow: 'hidden', position: 'relative', border: '1px solid rgba(255,255,255,.04)' }}>
             {cs.image
               ? <Image src={cs.image} alt={cs.title} fill style={{ objectFit: 'cover' }} unoptimized />
-              : <div style={{ display: 'grid', placeItems: 'center', height: '260px', fontSize: '11px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Client image</div>
+              : <div style={{ display: 'grid', placeItems: 'center', height: '360px', fontSize: '11px', color: '#6E8098', fontFamily: 'var(--font-jakarta)' }}>Client image</div>
             }
           </div>
         </div>
