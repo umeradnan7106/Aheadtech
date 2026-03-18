@@ -119,12 +119,12 @@ function RenderBody({ body }: { body: any[] }) {
             }
             const children = bodyBlock.children?.map(renderChild)
             if (bodyBlock.listItem === 'bullet') {
-              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
+              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
             }
             if (bodyBlock.listItem === 'number') {
-              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
+              return <li key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{children}</li>
             }
-            return <p key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, margin: '0 0 8px 0' }}>{children}</p>
+            return <p key={idx} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#374151', lineHeight: 1.7, margin: '0 0 8px 0' }}>{children}</p>
           }
 
           const renderInfoContent = (item: any, j: number) => {
