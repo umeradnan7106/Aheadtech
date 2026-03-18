@@ -168,12 +168,12 @@ function RenderBody({ body }: { body: any[] }) {
             <div key={i} style={{ background: '#FAF5FF', border: '1.5px solid #D8B4FE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
                 {block.emoji && <span style={{ fontSize: '20px' }}>{block.emoji}</span>}
-                <h4 style={{ fontFamily: 'var(--font-bricolage)', fontSize: '16px', fontWeight: 800, color: '#4B0082', margin: 0 }}>
+                <h4 style={{ fontFamily: 'var(--font-bricolage)', fontSize: '20px', fontWeight: 800, color: '#4B0082', margin: 0 }}>
                   {block.heading}
                 </h4>
               </div>
               {block.subtitle && (
-                <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#6B21A8', fontStyle: 'italic', fontWeight: 600, margin: '0 0 12px 0' }}>
+                <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#6B21A8', fontWeight: 600, margin: '0 0 12px 0' }}>
                   {block.subtitle}
                 </p>
               )}
