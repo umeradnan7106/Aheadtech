@@ -434,6 +434,16 @@ export default {
       ],
     },
 
+    // ── Tags / Keywords ──────────────────────────────────────────────────
+    {
+      name: 'tags',
+      title: 'Tags / Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'E.g. "meta ads", "facebook ads for ecommerce", "ROAS improvement"',
+      options: { layout: 'tags' },
+    },
+
     // ── SEO ─────────────────────────────────────────────────────────────
     { name: 'seo', title: 'SEO Meta', type: 'seoMeta' },
   ],

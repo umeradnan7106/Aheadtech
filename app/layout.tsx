@@ -26,6 +26,7 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://aheadtech360.com'),
   title: 'AheadTech360 — We make your marketing make money.',
   description: 'We help small businesses make more money from their marketing. Meta Ads, Google Ads, SEO, CRO, Email, Web Design.',
 }

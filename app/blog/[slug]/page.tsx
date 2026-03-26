@@ -13,6 +13,7 @@ import CTABox from '@/components/blog/CTABox'
 
 const POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
   title, category, publishedAt, readTime, excerpt,
+  tags,
   "image": { "url": coverImage.asset->url, "alt": coverImage.alt },
   body[]{
     ...,
@@ -156,7 +157,7 @@ function RenderBody({ body }: { body: any[] }) {
               return (
                 <ul key={j} style={{ margin: '0 0 8px 0', paddingLeft: '20px' }}>
                   {(item.items || []).map((b: string, k: number) => (
-                    <li key={k} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{b}</li>
+                    <li key={k} style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '4px' }}>{b}</li>
                   ))}
                 </ul>
               )
@@ -188,11 +189,11 @@ function RenderBody({ body }: { body: any[] }) {
           return (
             <div key={i} style={{ background: '#EFF6FF', border: '1.5px solid #BFDBFE', borderRadius: '10px', padding: '20px 24px', margin: '24px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <strong style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 800, color: '#1E40AF' }}>
+                <strong style={{ fontFamily: 'var(--font-jakarta)', fontSize: '20px', fontWeight: 800, color: '#1E40AF' }}>
                   {block.label || ''}
                 </strong>
               </div>
-              <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', color: '#1E3A5F', lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-jakarta)', fontSize: '18px', color: '#1E3A5F', lineHeight: 1.7, margin: 0 }}>
                 {block.text}
               </p>
             </div>
@@ -209,7 +210,7 @@ function RenderBody({ body }: { body: any[] }) {
                   {block.caption}
                 </p>
               )}
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', fontFamily: 'var(--font-jakarta)' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '18px', fontFamily: 'var(--font-jakarta)' }}>
                 <thead>
                   <tr>
                     {headers.map((h: string, j: number) => (
@@ -284,21 +285,32 @@ function RenderBody({ body }: { body: any[] }) {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = await sanityFetch<any>(POST_QUERY, { slug })
+  const title = post?.seo?.metaTitle || post?.title || 'Blog — AheadTech360'
+  const description = post?.seo?.metaDescription || post?.excerpt || ''
+  // Merge seo.keywords string + tags array into one keywords string
+  const keywordParts = [
+    post?.seo?.keywords || '',
+    ...(post?.tags || []),
+  ].filter(Boolean)
+  const keywords = keywordParts.join(', ')
+  const ogImage = post?.seo?.ogImageUrl || post?.image?.url
   return {
-    title: post?.seo?.metaTitle || post?.title || 'Blog — AheadTech360',
-    description: post?.seo?.metaDescription || post?.excerpt || '',
-    keywords: post?.seo?.keywords || '',
+    title,
+    description,
+    keywords,
+    alternates: { canonical: `https://aheadtech360.com/blog/${slug}` },
     openGraph: {
-      title: post?.seo?.metaTitle || post?.title || '',
-      description: post?.seo?.metaDescription || post?.excerpt || '',
-      images: post?.seo?.ogImageUrl
-        ? [{ url: post.seo.ogImageUrl }]
-        : post?.image?.url ? [{ url: post.image.url }] : [],
+      title,
+      description,
+      type: 'article',
+      url: `https://aheadtech360.com/blog/${slug}`,
+      siteName: 'AheadTech360',
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: post?.title || '' }] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post?.seo?.metaTitle || post?.title || '',
-      description: post?.seo?.metaDescription || post?.excerpt || '',
+      title,
+      description,
     },
   }
 }
@@ -460,7 +472,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 Read our latest Articles
               </h2>
               <Link href="/blog"
-                style={{ display: 'inline-flex', padding: '10px 22px', borderRadius: '8px', fontSize: '14px', fontWeight: 700, background: '#213D79', color: '#fff', fontFamily: 'var(--font-jakarta)', textDecoration: 'none' }}>
+                style={{ display: 'inline-flex', padding: '10px 22px', borderRadius: '8px', fontSize: '18px', fontWeight: 700, background: '#213D79', color: '#fff', fontFamily: 'var(--font-jakarta)', textDecoration: 'none' }}>
                 View All →
               </Link>
             </div>
@@ -479,7 +491,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       </div>
                       <div style={{ padding: '18px' }}>
                         <div style={{ fontSize: '10px', fontWeight: 800, color: cc, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontFamily: 'var(--font-jetbrains)' }}>{p.category}</div>
-                        <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', lineHeight: 1.4, fontFamily: 'var(--font-bricolage)' }}>{p.title}</h4>
+                        <h4 style={{ fontSize: '18px', fontWeight: 700, color: '#080E1C', marginBottom: '6px', lineHeight: 1.4, fontFamily: 'var(--font-bricolage)' }}>{p.title}</h4>
                         {p.excerpt && <p style={{ fontSize: '12px', color: '#6E8098', lineHeight: 1.5, fontFamily: 'var(--font-jakarta)' }}>{p.excerpt}</p>}
                       </div>
                     </div>
@@ -493,7 +505,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Sticky floating button */}
       <Link href="/contact"
-        style={{ position: 'fixed', bottom: '28px', right: '28px', zIndex: 999, display: 'inline-flex', alignItems: 'center', gap: '7px', padding: '13px 22px', borderRadius: '99px', background: '#25B472', color: '#fff', fontSize: '14px', fontWeight: 800, fontFamily: 'var(--font-jakarta)', textDecoration: 'none', boxShadow: '0 8px 28px rgba(37,180,114,.4)' }}>
+        style={{ position: 'fixed', bottom: '28px', right: '28px', zIndex: 999, display: 'inline-flex', alignItems: 'center', gap: '7px', padding: '13px 22px', borderRadius: '99px', background: '#25B472', color: '#fff', fontSize: '18px', fontWeight: 800, fontFamily: 'var(--font-jakarta)', textDecoration: 'none', boxShadow: '0 8px 28px rgba(37,180,114,.4)' }}>
         Free Audit →
       </Link>
 

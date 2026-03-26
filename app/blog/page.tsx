@@ -64,7 +64,15 @@
 
 
 // app/blog/page.tsx  ← SERVER COMPONENT (no 'use client')
+import type { Metadata } from 'next'
 import { sanityFetch } from '@/sanity/lib/client'
+
+export const metadata: Metadata = {
+  title: 'Marketing Blog — AheadTech360',
+  description: 'Actionable guides on Meta Ads, Google Ads, SEO, CRO, Email Marketing and more for ecommerce and service businesses.',
+  keywords: 'meta ads, google ads, facebook ads, ecommerce marketing, SEO, CRO, email marketing',
+  alternates: { canonical: 'https://aheadtech360.com/blog' },
+}
 import BlogClientPage from '@/app/blog/BlogClientPage'
 
 const QUERY = `*[_type == "blogPost"] | order(publishedAt desc) {
