@@ -6,6 +6,7 @@ import Image from 'next/image'
 import ServicesSection from '@/components/sections/ServicesSection'
 import GuaranteeBar from '@/components/sections/GuaranteeBar'
 import { sanityFetch } from '@/sanity/lib/client'
+import LeadConnectorWidget from '@/components/LeadConnectorWidget'
 
 const QUERY = `*[_type == "servicesPage"][0]{
   pageHeading, pageSubheading,
@@ -52,19 +53,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ServicesPage() {
   const data = await sanityFetch<any>(QUERY)
 
-  // Map Sanity services → ServicesSection format (iconUrl takes priority over local icon)
   const sanityServices = data?.services?.length
     ? data.services.map((s: any) => ({
-        iconUrl: s.iconUrl ?? undefined,
-        iconBg: s.iconBg || '#EEF2F9',
-        title: s.title || '',
-        description: s.description || '',
-        resultValue: s.resultValue || '',
-        resultLabel: s.resultLabel || '',
-      }))
+      iconUrl: s.iconUrl ?? undefined,
+      iconBg: s.iconBg || '#EEF2F9',
+      title: s.title || '',
+      description: s.description || '',
+      resultValue: s.resultValue || '',
+      resultLabel: s.resultLabel || '',
+    }))
     : undefined
 
-  // Why Us cards: prefer Sanity data with iconUrl, fall back to local images
   const whyUsCards = data?.whyUsCards?.length ? data.whyUsCards : WHY_US_DEFAULT
 
   return (
@@ -137,6 +136,9 @@ export default async function ServicesPage() {
           </a>
         </div>
       </section>
+
+      {/* Chat Widget — sirf services page pe, unmount hone per auto remove */}
+      <LeadConnectorWidget />
 
       <style>{`
         @media(max-width:900px){
