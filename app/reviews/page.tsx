@@ -435,16 +435,17 @@ export default function ReviewsPage() {
   return (
     <>
       {/* ── Hero (dark) ── */}
-      <section style={{ background: 'linear-gradient(160deg,#080E1C 0%,#0F1E3A 100%)', padding: '80px 32px 60px', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', color: '#34D48A', fontFamily: 'var(--font-jetbrains)', marginBottom: '16px' }}>
+      <section style={{ position: 'relative', padding: '88px 32px 70px', textAlign: 'center', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{ display: 'inline-block', fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', color: '#8ff0c0', fontFamily: 'var(--font-jetbrains)', marginBottom: '16px' }}>
             REVIEWS &amp; TESTIMONIALS
           </div>
           <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, fontSize: 'clamp(36px,5vw,56px)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.3px', marginBottom: '20px' }}>
             Don&apos;t take our word for it.{' '}
             <em style={{ color: '#25B472', fontStyle: 'italic' }}>Listen to theirs.</em>
           </h1>
-          <p style={{ fontSize: '16px', color: '#A4B3C4', fontFamily: 'var(--font-jakarta)', lineHeight: 1.7, maxWidth: '560px', margin: '0 auto' }}>
+          <p style={{ fontSize: '16px', color: '#e6edf9', fontFamily: 'var(--font-jakarta)', lineHeight: 1.7, maxWidth: '560px', margin: '0 auto' }}>
             4.9 stars across 5 platforms. Real video testimonials. Verified Shopify Partner, Clutch &amp; GoodFirms ratings. Watch what happens when founders actually own their ad accounts again.
           </p>
         </div>
@@ -577,19 +578,20 @@ export default function ReviewsPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ background: 'linear-gradient(160deg,#080E1C,#162952)', padding: '90px 32px', textAlign: 'center' }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <section style={{ position: 'relative', padding: '74px 32px', textAlign: 'center', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'rgba(16,25,45,.35)' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '600px', margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, fontSize: 'clamp(34px,4.5vw,50px)', color: '#fff', lineHeight: 1.1, marginBottom: '16px' }}>
             Ready to be our{' '}
             <em style={{ color: '#34D48A', fontStyle: 'italic' }}>next 5-star review?</em>
           </h2>
-          <p style={{ fontSize: '15px', color: '#A4B3C4', marginBottom: '32px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.7 }}>
-            Free audit. We&apos;ll tell you exactly what we&apos;d fix first. Then you decide.
+          <p style={{ fontSize: '15px', color: '#e6edf9', marginBottom: '32px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.7 }}>
+            Tell us about your store. We&apos;ll tell you exactly what we&apos;d fix first. Then you decide.
           </p>
-          <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '15px 40px', borderRadius: '10px', fontSize: '16px', fontWeight: 700, background: '#25B472', color: '#fff', fontFamily: 'var(--font-jakarta)', textDecoration: 'none' }}>
-            Get My Free Audit →
+          <Link href="/apply" style={{ display: 'inline-flex', alignItems: 'center', padding: '.82rem 1.55rem', borderRadius: '12px', fontSize: '1rem', fontWeight: 700, background: '#25B472', color: '#05261a', fontFamily: 'var(--font-jakarta)', textDecoration: 'none' }}>
+            Talk to Us
           </Link>
-          <p style={{ fontSize: '12px', color: '#3E5068', marginTop: '16px', fontFamily: 'var(--font-jetbrains)' }}>
+          <p style={{ fontSize: '12px', color: '#9fb2d6', marginTop: '16px', fontFamily: 'var(--font-jetbrains)' }}>
             No card · No pitch · Just our honest read on your account
           </p>
         </div>

@@ -5,6 +5,8 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const ctaGreen: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '1rem', padding: '.82rem 1.55rem', borderRadius: '12px', background: '#25B472', color: '#05261a', textDecoration: 'none' }
+
 const FIXED_CATEGORIES = [
   'View All',
   'SEO',
@@ -47,17 +49,21 @@ export default function BlogClientPage({ posts }: { posts: any[] }) {
   return (
     <>
       {/* ── Hero ── */}
-      <section style={{ background: '#fff', textAlign: 'center', padding: '60px 32px 0' }}>
-        <div style={{ maxWidth: '1180px', margin: '0 auto', placeItems: 'center' }}>
-          <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>
-            Blog
+      <section style={{ position: 'relative', color: '#fff', textAlign: 'center', padding: '88px 32px 60px', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
+          <div style={{ display: 'inline-block', fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#8ff0c0' }}>
+            Field notes
           </div>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(30px,4vw,44px)', color: '#1C2A42' }}>
-            Stuff that <em style={{ color: '#25B472', fontStyle: 'italic' }}>actually helps.</em>
+          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(30px,4vw,44px)', color: '#fff' }}>
+            What we learn running apparel stores, written down.
           </h1>
-          <p style={{ fontSize: '15px', color: '#6E8098', margin: '8px auto 0', fontFamily: 'var(--font-jakarta)' }}>
-            Same playbook we use for clients. Free.
+          <p style={{ fontSize: '15px', color: '#e6edf9', margin: '8px auto 0', fontFamily: 'var(--font-jakarta)' }}>
+            No recycled tips. Field notes from real accounts, published when we have something worth saying.
           </p>
+          <div style={{ marginTop: '24px' }}>
+            <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+          </div>
         </div>
       </section>
 

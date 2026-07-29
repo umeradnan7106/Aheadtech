@@ -92,16 +92,17 @@ export default function TermsPage() {
   return (
     <>
       {/* Hero */}
-      <section style={{ background: 'linear-gradient(160deg,#EEF2F9,#fff)', padding: '60px 32px', textAlign: 'center' }}>
-        <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
-          <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#213D79' }}>Legal</div>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(38px,5.5vw,58px)', color: '#1C2A42', marginBottom: '12px', letterSpacing: '-0.3px' }}>
+      <section style={{ position: 'relative', color: '#fff', padding: '88px 32px 60px', textAlign: 'center', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
+          <div style={{ display: 'inline-block', fontSize: '11px', fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '10px', fontFamily: 'var(--font-jetbrains)', color: '#8ff0c0' }}>Legal</div>
+          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 800, lineHeight: 1.1, fontSize: 'clamp(38px,5.5vw,58px)', color: '#fff', marginBottom: '12px', letterSpacing: '-0.3px' }}>
             Terms & Conditions
           </h1>
-          <p style={{ fontSize: '15px', color: '#6E8098', maxWidth: '540px', margin: '0 auto', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
+          <p style={{ fontSize: '15px', color: '#e6edf9', maxWidth: '540px', margin: '0 auto', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)' }}>
             Understanding our commitment to transparency and compliance.
           </p>
-          <p style={{ fontSize: '12px', color: '#A4B3C4', marginTop: '10px', fontFamily: 'var(--font-jakarta)' }}>
+          <p style={{ fontSize: '12px', color: '#9fb2d6', marginTop: '10px', fontFamily: 'var(--font-jakarta)' }}>
             AheadTech360 LLC · Last updated: 2026
           </p>
         </div>
