@@ -2,6 +2,7 @@
 // Web Development service page. New route, no Sanity wiring (hardcoded copy matching the
 // mockup's reusable service-page template).
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -49,11 +50,8 @@ export default function WebDevPage() {
       {/* The fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="svc-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 9l1-5h14l1 5M4 9v10h16V9M4 9h16M9 19v-5h6v5" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Fast mobile-first build</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', order: 1 }}>
+            <Image src="/images/Iqrar_khoso_A_glossy_3D_product_page_mockup_with_a_clear_green_add-to-cart_bu_b00a9ded-b0c0-4302-9fdd-d7632c5824de.png" alt="Fast mobile-first build" fill style={{ objectFit: 'contain' }} />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>

@@ -2,6 +2,7 @@
 // "Two ways in. One is open now." — Fashion Growth System / Fashion Scale System twin cards.
 // Home page only, no existing counterpart. FGS's page exists (/fgs); FSS is still a
 // placeholder until its waitlist page is built.
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ProgramsSection() {
@@ -39,24 +40,13 @@ export default function ProgramsSection() {
         <div className="programs-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '22px' }}>
           {/* Fashion Growth System — open now */}
           <div style={{ background: '#fff', border: '1px solid #DFE5ED', borderTop: '5px solid #25B472', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(8,14,28,.07)' }}>
-            <figure
-              style={{
-                aspectRatio: '16/8',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '12px',
-                textAlign: 'center',
-                color: '#fff',
-                padding: '24px',
-                background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)',
-              }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-                <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3" />
-              </svg>
-              <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', letterSpacing: '.06em', color: '#eef4ff' }}>Fashion Growth System</figcaption>
+            <figure style={{ position: 'relative', aspectRatio: '16/8', background: '#fff' }}>
+              <Image
+                src="/images/Iqrar_khoso_A_glossy_3D_rounded_rocket_lifting_gently_off_a_white_launch_pad_ddcece5e-ccde-45de-8163-c3ff112ba6c1.png"
+                alt="Fashion Growth System"
+                fill
+                style={{ objectFit: 'contain' }}
+              />
             </figure>
             <div style={{ padding: '22px' }}>
               <span style={{ display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.64rem', letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 600, borderRadius: '99px', padding: '4px 11px', background: '#25B472', color: '#05261a' }}>
@@ -77,25 +67,13 @@ export default function ProgramsSection() {
 
           {/* Fashion Scale System — launching soon */}
           <div style={{ background: '#fff', border: '1px solid #DFE5ED', borderTop: '5px solid #DFE5ED', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(8,14,28,.07)' }}>
-            <figure
-              style={{
-                aspectRatio: '16/8',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '12px',
-                textAlign: 'center',
-                color: '#fff',
-                padding: '24px',
-                background: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)',
-              }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-                <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" />
-                <path d="M9 12l2 2 4-4" />
-              </svg>
-              <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', letterSpacing: '.06em', color: '#eef4ff' }}>Fashion Scale System</figcaption>
+            <figure style={{ position: 'relative', aspectRatio: '16/8', background: '#fff' }}>
+              <Image
+                src="/images/Iqrar_khoso_A_glossy_3D_scale_motif_in_the_center_a_bold_green_upward_arrow_204aa0e7-30c6-4af7-961c-9b56f119ee60.png"
+                alt="Fashion Scale System"
+                fill
+                style={{ objectFit: 'contain' }}
+              />
             </figure>
             <div style={{ padding: '22px' }}>
               <span style={{ display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.64rem', letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 600, borderRadius: '99px', padding: '4px 11px', background: '#F2F5F8', color: '#6E8098' }}>

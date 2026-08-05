@@ -2,6 +2,7 @@
 // Human Voice Agent (AI) service page. New route, no Sanity wiring (hardcoded copy matching
 // the mockup's reusable service-page template).
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -49,11 +50,8 @@ export default function VoicePage() {
       {/* The fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="svc-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>AI voice agent call UI</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', order: 1 }}>
+            <Image src="/images/Iqrar_khoso_A_glossy_3D_phone-call_card_with_a_green_microphone_orb_and_soft_41323ca5-1d01-45b9-9927-191519b13373.png" alt="AI voice agent call UI" fill style={{ objectFit: 'contain' }} />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>

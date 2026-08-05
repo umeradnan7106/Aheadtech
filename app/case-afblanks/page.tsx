@@ -2,6 +2,7 @@
 // Case study: AF Blanks — pending, no verified numbers yet. New route, hardcoded copy, no Sanity wiring.
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'AF Blanks Case Study — AheadTech360',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const eyebrow: React.CSSProperties = { display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#1C8F5A', fontWeight: 600, marginBottom: '14px' }
 const h2: React.CSSProperties = { fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(1.55rem,3.2vw,2.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em' }
 const ctaGreen: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '1rem', padding: '.82rem 1.55rem', borderRadius: '12px', background: '#25B472', color: '#05261a', textDecoration: 'none' }
+const ctaGhost: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '.95rem', padding: '.7rem 1.3rem', borderRadius: '10px', border: '1px solid #DFE5ED', color: '#213D79', textDecoration: 'none' }
 const bodyText: React.CSSProperties = { fontSize: '1rem', color: '#6E8098', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)', maxWidth: '62ch' }
 
 export default function CaseAfBlanksPage() {
@@ -54,12 +56,18 @@ export default function CaseAfBlanksPage() {
               Engagement summary to be published with verified results. In line with our rule: where we do not yet
               have a verified number, we show the work and no number.
             </p>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '20px' }}>
+              <Link href="/fgs" style={ctaGreen}>See the Program</Link>
+              <Link href="/clients" style={ctaGhost}>All Clients</Link>
+            </div>
           </div>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#1c8f75 0%,#25B472 70%,#57c98f 100%)' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>AF Blanks work in progress</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)' }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_circular_badge_in_the_center_made_of_a_navy_and_green_626811c3-b996-4271-b4cb-ae9228888dc8.png"
+              alt="AF Blanks work in progress"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
           </figure>
         </div>
       </section>

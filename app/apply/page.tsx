@@ -76,27 +76,33 @@ export default async function ApplyPage() {
 
   return (
     <>
-      <section
-        style={{
-          position: 'relative',
-          color: '#fff',
-          padding: '88px 32px 70px',
-          overflow: 'hidden',
-          background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)',
-        }}
-      >
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
-          <span style={{ display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#8ff0c0', fontWeight: 600, marginBottom: '14px' }}>
-            Talk to us
-          </span>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#fff', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '20ch' }}>
-            Tell us about your store.
-          </h1>
-          <p style={{ fontSize: '1.18rem', color: '#e6edf9', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
-            Five minutes of questions. Then we look at your store before we ever get on a call, so the first
-            conversation is about you, not about us.
-          </p>
+      <section style={{ background: '#F2F5F8' }}>
+        <div
+          className="apply-hero-grid"
+          style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '40px', alignItems: 'center', minHeight: '420px' }}
+        >
+          <div className="apply-hero-text" style={{ padding: '64px 0' }}>
+            <span style={{ display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#1C8F5A', fontWeight: 600, marginBottom: '14px' }}>
+              Talk to us
+            </span>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '20ch' }}>
+              Tell us about your store.
+            </h1>
+            <p style={{ fontSize: '1.18rem', color: '#6E8098', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
+              Five minutes of questions. Then we look at your store before we ever get on a call, so the first
+              conversation is about you, not about us.
+            </p>
+          </div>
+          <div style={{ position: 'relative', alignSelf: 'stretch', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_circular_badge_in_the_center_made_of_a_navy_and_green_626811c3-b996-4271-b4cb-ae9228888dc8.png"
+              alt=""
+              width={640}
+              height={640}
+              style={{ width: '100%', height: 'auto', maxHeight: '380px', objectFit: 'contain', borderRadius: '14px' }}
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -138,7 +144,11 @@ export default async function ApplyPage() {
       </section>
 
       <style>{`
-        @media(max-width:900px){ .apply-wrap { grid-template-columns: 1fr !important; } }
+        @media(max-width:900px){
+          .apply-wrap { grid-template-columns: 1fr !important; }
+          .apply-hero-grid { grid-template-columns: 1fr !important; min-height: 0 !important; gap: 0 !important; }
+          .apply-hero-text { padding: 56px 0 28px !important; }
+        }
       `}</style>
     </>
   )

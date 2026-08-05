@@ -56,21 +56,30 @@ function ClientCard({ c }: { c: Client }) {
 export default function ClientsPage() {
   return (
     <>
-      {/* Hero */}
-      <section style={{ position: 'relative', color: '#fff', padding: '88px 32px 70px', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
-          <span style={{ ...eyebrow, color: '#8ff0c0' }}>The proof</span>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#fff', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
-            Real stores. Real numbers. Sources named.
-          </h1>
-          <p style={{ fontSize: '1.18rem', color: '#e6edf9', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
-            Every figure we publish is verified against store order data. Four full case studies are live below.
-            The rest are being finalized and show no numbers until they are verified.
-          </p>
-          <div style={{ marginTop: '24px' }}>
-            <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+      {/* Hero (split): text left, illustration right, on a light panel */}
+      <section style={{ background: '#F2F5F8' }}>
+        <div className="clients-hero-grid" style={{ maxWidth: '1180px', margin: '0 auto', padding: '70px 32px', display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: '40px', alignItems: 'center' }}>
+          <div>
+            <span style={eyebrow}>The proof</span>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
+              Real stores. Real numbers. Sources named.
+            </h1>
+            <p style={{ fontSize: '1.18rem', color: '#6E8098', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
+              Every figure we publish is verified against store order data. Four full case studies are live below.
+              The rest are being finalized and show no numbers until they are verified.
+            </p>
+            <div style={{ marginTop: '24px' }}>
+              <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+            </div>
           </div>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)' }}>
+            <Image
+              src="/images/Iqrar_khoso_Two_glossy_3D_bars_on_one_base_a_very_tall_navy_bar_with_a_crisp_d0a69c9e-8939-4d46-b7d1-d336418fe3a2.png"
+              alt="Apparel client work wall"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
+          </figure>
         </div>
       </section>
 
@@ -91,13 +100,13 @@ export default function ClientsPage() {
           </p>
           <div className="clients-rebuild-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '22px' }}>
             {[
-              { name: 'EZtmart rebuild', gradient: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' },
-              { name: 'EZDTFMaker rebuild', gradient: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)' },
-              { name: 'TrashedPunk rebuild', gradient: 'linear-gradient(135deg,#1c8f75 0%,#25B472 70%,#57c98f 100%)' },
-              { name: 'Lofty Creations rebuild', gradient: 'linear-gradient(135deg,#2a4d92 0%,#3a63ad 60%,#6f8fc9 100%)' },
+              { name: 'EZtmart rebuild', src: '/images/Iqrar_khoso_Two_glossy_3D_floating_glass_dashboard_panels_side_by_side_The_l_7d562f11-027f-403f-b7db-dc993bef790f.png' },
+              { name: 'EZDTFMaker rebuild', src: '/images/Iqrar_khoso_A_glossy_3D_grid_sheet_packed_with_small_emerald_and_navy_transfe_bbc22690-2e2a-4b47-90dc-396bcba27866.png' },
+              { name: 'TrashedPunk rebuild', src: '/images/Iqrar_khoso_A_glossy_3D_circular_badge_in_the_center_made_of_a_navy_and_green_626811c3-b996-4271-b4cb-ae9228888dc8.png' },
+              { name: 'Lofty Creations rebuild', src: '/images/Iqrar_khoso_A_glossy_3D_funnel_shown_front-on_At_the_wide_top_many_small_na_555ed1b0-024c-440d-8c2e-480cc71601f5.png' },
             ].map((r) => (
-              <figure key={r.name} style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/10', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: '18px', background: r.gradient }}>
-                <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.7rem', textAlign: 'center', color: '#eef4ff' }}>{r.name}</figcaption>
+              <figure key={r.name} style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/10', background: '#fff', border: '1px solid #DFE5ED' }}>
+                <Image src={r.src} alt={r.name} fill style={{ objectFit: 'contain', background: '#fff' }} />
               </figure>
             ))}
           </div>
@@ -125,6 +134,7 @@ export default function ClientsPage() {
 
       <style>{`
         @media(max-width:900px){
+          .clients-hero-grid { grid-template-columns: 1fr !important; }
           .clients-grid { grid-template-columns: 1fr !important; }
           .clients-rebuild-grid { grid-template-columns: 1fr 1fr !important; }
         }

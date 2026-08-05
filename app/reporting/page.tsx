@@ -2,6 +2,7 @@
 // Reporting service page. New route, no Sanity wiring (hardcoded copy matching the
 // mockup's reusable service-page template).
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -49,11 +50,8 @@ export default function ReportingPage() {
       {/* The fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="svc-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#2b3f74 0%,#3a5a86 60%,#4f86a0 100%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Plain-language report</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', order: 1 }}>
+            <Image src="/images/Iqrar_khoso_A_single_glossy_3D_floating_translucent_glass_report_panel_with_t_1313d59d-9a1c-4e8d-95bb-918641134b32 (1).png" alt="Plain-language report" fill style={{ objectFit: 'contain' }} />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>

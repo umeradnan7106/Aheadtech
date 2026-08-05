@@ -1,42 +1,31 @@
 // components/sections/VerticalsSection.tsx
 // "Who we work with" — the four apparel verticals. Home page only, no existing counterpart.
-import type { ReactNode } from 'react'
+import Image from 'next/image'
 
 interface Vertical {
-  gradient: string
-  icon: ReactNode
+  image: string
   title: string
   description: string
 }
 
 const VERTICALS: Vertical[] = [
   {
-    gradient: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)',
-    icon: (
-      <>
-        <circle cx="6" cy="6" r="2.5" />
-        <circle cx="6" cy="18" r="2.5" />
-        <path d="M8 8l12 10M8 16L20 6" />
-      </>
-    ),
+    image: '/images/Iqrar_khoso_A_glossy_3D_heat_press_pressing_a_printed_t-shirt_a_peeled_DTF_t_3bc05d53-a57c-421a-ad81-18443bc62d08.png',
     title: 'Custom & Print',
     description: 'DTF, screen print, embroidery, and POD shops that need orders, not quote chaos.',
   },
   {
-    gradient: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)',
-    icon: <path d="M8 3l4 2 4-2 5 4-3 3-1-1v11H7V9L6 10 3 7z" />,
+    image: '/images/Iqrar_khoso_A_glossy_3D_product_page_mockup_with_a_clear_green_add-to-cart_bu_b00a9ded-b0c0-4302-9fdd-d7632c5824de.png',
     title: 'Retail Fashion & D2C',
     description: 'Clothing brands that need traffic to turn into sales.',
   },
   {
-    gradient: 'linear-gradient(135deg,#1c8f75 0%,#25B472 70%,#57c98f 100%)',
-    icon: <path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10" />,
+    image: '/images/Iqrar_khoso_A_glossy_3D_thick_catalog_binder_open_beside_a_small_navy_wholesa_bfc89bea-2605-4a3a-8420-db3c6b793612.png',
     title: 'Wholesale & Blank Apparel',
     description: 'B2B suppliers whose buyers stall at minimums and bulk pricing.',
   },
   {
-    gradient: 'linear-gradient(135deg,#2a4d92 0%,#3a63ad 60%,#6f8fc9 100%)',
-    icon: <path d="M4 4v3M20 4v3M4 7h16M7 7l-1 13M17 7l1 13M12 7v13" />,
+    image: '/images/Streetwear-brand.webp',
     title: 'Accessories, Niche & Streetwear',
     description: 'Drop driven brands that need momentum between releases.',
   },
@@ -84,27 +73,8 @@ export default function VerticalsSection() {
               title="Coming soon"
               style={{ background: '#fff', border: '1px solid #DFE5ED', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(8,14,28,.07)' }}
             >
-              <figure
-                style={{
-                  position: 'relative',
-                  aspectRatio: '16/10',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '12px',
-                  textAlign: 'center',
-                  color: '#fff',
-                  padding: '24px',
-                  background: v.gradient,
-                }}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-                  {v.icon}
-                </svg>
-                <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', letterSpacing: '.06em', maxWidth: '24ch', color: '#eef4ff' }}>
-                  {v.title}
-                </figcaption>
+              <figure style={{ position: 'relative', aspectRatio: '16/10', background: '#fff' }}>
+                <Image src={v.image} alt={v.title} fill style={{ objectFit: 'contain' }} />
               </figure>
               <div style={{ padding: '20px 22px' }}>
                 <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.64rem', letterSpacing: '.13em', textTransform: 'uppercase', color: '#1C8F5A' }}>Vertical</span>

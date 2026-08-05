@@ -1,6 +1,7 @@
 // app/how/page.tsx
 // "What working with us looks like" — the full process page. New route, hardcoded copy.
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -25,19 +26,33 @@ const ctaGreen: React.CSSProperties = { display: 'inline-flex', alignItems: 'cen
 export default function HowPage() {
   return (
     <>
-      {/* Hero */}
-      <section style={{ position: 'relative', color: '#fff', padding: '88px 32px 70px', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
-          <span style={{ ...eyebrow, color: '#8ff0c0' }}>The process</span>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#fff', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
-            No mystery. Here is exactly what happens.
-          </h1>
-          <p style={{ fontSize: '1.18rem', color: '#e6edf9', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
-            From first message to week twelve, this is the process, in order.
-          </p>
-          <div style={{ marginTop: '24px' }}>
-            <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+      {/* Hero (split): text left, illustration right, on light panel */}
+      <section style={{ background: '#F2F5F8' }}>
+        <div
+          className="how-hero-grid"
+          style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '40px', alignItems: 'center', minHeight: '460px' }}
+        >
+          <div className="how-hero-text" style={{ padding: '64px 0' }}>
+            <span style={eyebrow}>The process</span>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
+              No mystery. Here is exactly what happens.
+            </h1>
+            <p style={{ fontSize: '1.18rem', color: '#6E8098', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
+              From first message to week twelve, this is the process, in order.
+            </p>
+            <div style={{ marginTop: '24px' }}>
+              <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+            </div>
+          </div>
+          <div style={{ position: 'relative', alignSelf: 'stretch', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_milestone_path_of_four_navy_spheres_stepping_upward_a_2cd242bc-fa51-4d97-9050-7efe0a41c814.png"
+              alt="The engagement process"
+              width={640}
+              height={640}
+              style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain', borderRadius: '14px' }}
+              priority
+            />
           </div>
         </div>
       </section>
@@ -99,6 +114,8 @@ export default function HowPage() {
         @media(max-width:900px){
           .how-split { grid-template-columns: 1fr !important; }
           .how-split figure { order: 1 !important; }
+          .how-hero-grid { grid-template-columns: 1fr !important; min-height: 0 !important; gap: 0 !important; }
+          .how-hero-text { padding: 56px 0 28px !important; }
         }
       `}</style>
     </>

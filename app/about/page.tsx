@@ -3,6 +3,7 @@
 // mockup: hero, origin split, location transparency, five commitments, CTA band.
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'About Us — AheadTech360',
@@ -59,12 +60,15 @@ export default function AboutPage() {
               VIFHE, but apparel is home and it is where we stay.
             </p>
           </div>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 21c1-5 5-7 8-7s7 2 8 7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>The team at work</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '10px', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 2px 12px rgba(8,14,28,.07)', padding: '24px' }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_circular_badge_in_the_center_made_of_a_navy_and_green_626811c3-b996-4271-b4cb-ae9228888dc8.png"
+              alt="Verified, accountable work"
+              width={520}
+              height={390}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#6E8098' }}>Built on verified results</figcaption>
           </figure>
         </div>
       </section>

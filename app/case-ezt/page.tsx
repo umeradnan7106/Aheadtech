@@ -2,6 +2,7 @@
 // Case study: EzTmart — verified numbers, no arc. New route, hardcoded copy, no Sanity wiring.
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'EzTmart Case Study — AheadTech360',
@@ -18,6 +19,7 @@ const STATS = [
 const eyebrow: React.CSSProperties = { display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#1C8F5A', fontWeight: 600, marginBottom: '14px' }
 const h2: React.CSSProperties = { fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(1.55rem,3.2vw,2.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em' }
 const ctaGreen: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '1rem', padding: '.82rem 1.55rem', borderRadius: '12px', background: '#25B472', color: '#05261a', textDecoration: 'none' }
+const ctaGhost: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '.95rem', padding: '.7rem 1.3rem', borderRadius: '10px', border: '1px solid #DFE5ED', color: '#213D79', textDecoration: 'none' }
 const bodyText: React.CSSProperties = { fontSize: '1rem', color: '#6E8098', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)', maxWidth: '62ch' }
 
 export default function CaseEztPage() {
@@ -73,11 +75,13 @@ export default function CaseEztPage() {
               that did that scale justice and could actually convert on it.
             </p>
           </div>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#1c8f75 0%,#25B472 70%,#57c98f 100%)' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Wholesale catalog audit</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)' }}>
+            <Image
+              src="/images/Iqrar_khoso_On_the_left_five_small_disconnected_navy_boxes_scattered_and_tan_4b5d4041-5cbc-41f2-a92e-25b9d0e8b001.png"
+              alt="Wholesale catalog audit"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
           </figure>
         </div>
       </section>
@@ -85,11 +89,13 @@ export default function CaseEztPage() {
       {/* Fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="case-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#2a4d92 0%,#3a63ad 60%,#6f8fc9 100%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Rebuilt wholesale storefront</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)', order: 1 }}>
+            <Image
+              src="/images/Iqrar_khoso_Two_glossy_3D_floating_glass_dashboard_panels_side_by_side_The_l_7d562f11-027f-403f-b7db-dc993bef790f.png"
+              alt="Rebuilt wholesale storefront"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>
@@ -101,6 +107,10 @@ export default function CaseEztPage() {
               the high 50s, on a B2B storefront where catalog credibility and buyer trust matter more than flashy
               creative.
             </p>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '20px' }}>
+              <Link href="/fgs" style={ctaGreen}>See the Program</Link>
+              <Link href="/clients" style={ctaGhost}>All Clients</Link>
+            </div>
           </div>
         </div>
       </section>

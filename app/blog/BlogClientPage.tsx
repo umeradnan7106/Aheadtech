@@ -163,12 +163,74 @@ export default function BlogClientPage({ posts }: { posts: any[] }) {
         </div>
       </section>
 
+      {/* ── Lead-magnet band ── */}
+      <section style={{ background: '#F2F5F8', padding: '64px 32px' }}>
+        <div
+          className="opt-card"
+          style={{
+            maxWidth: '1180px',
+            margin: '0 auto',
+            background: '#fff',
+            border: '1px solid #DFE5ED',
+            borderRadius: '16px',
+            boxShadow: '0 2px 12px rgba(8,14,28,.07)',
+            padding: '36px 40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '32px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div style={{ flex: '1 1 320px' }}>
+            <span style={{ display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#1C8F5A', fontWeight: 600, marginBottom: '10px' }}>
+              Free checklist
+            </span>
+            <h3 style={{ fontFamily: 'var(--font-bricolage)', fontSize: '1.4rem', fontWeight: 800, color: '#1C2A42', marginBottom: '6px' }}>
+              15 Conversion Killers
+            </h3>
+            <p style={{ fontSize: '.95rem', color: '#6E8098', fontFamily: 'var(--font-jakarta)', lineHeight: 1.6, margin: 0 }}>
+              The mistakes that quietly cost apparel stores orders every day. Opt in and get the PDF.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', flex: '0 1 380px' }}>
+            <input
+              type="email"
+              placeholder="you@brand.com"
+              aria-label="Email"
+              disabled
+              title="Coming soon"
+              style={{ flex: '1 1 200px', minWidth: '180px', padding: '.78rem .9rem', borderRadius: '10px', border: '1px solid #DFE5ED', color: '#1C2A42', fontFamily: 'var(--font-jakarta)' }}
+            />
+            <span title="Coming soon" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '1rem', padding: '.82rem 1.55rem', borderRadius: '12px', background: '#25B472', color: '#05261a', cursor: 'default' }}>
+              Get the PDF
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA band ── */}
+      <section style={{ position: 'relative', padding: '74px 32px', color: '#fff', textAlign: 'center', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'rgba(16,25,45,.35)' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '760px', margin: '0 auto' }}>
+          <h2 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(1.55rem,3.2vw,2.3rem)', fontWeight: 800, color: '#fff', lineHeight: 1.13 }}>
+            Reading is free. So is the first look at your store.
+          </h2>
+          <div style={{ marginTop: '24px' }}>
+            <Link href="/apply" style={ctaGreen}>Talk to Us</Link>
+          </div>
+        </div>
+      </section>
+
       <style>{`
         @media(max-width:900px){
           .blog-grid { grid-template-columns: repeat(2,1fr) !important; }
         }
         @media(max-width:600px){
           .blog-grid { grid-template-columns: 1fr !important; }
+        }
+        @media(max-width:640px){
+          .opt-card { flex-direction: column !important; align-items: flex-start !important; padding: 28px 24px !important; }
         }
       `}</style>
     </>

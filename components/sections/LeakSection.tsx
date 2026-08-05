@@ -1,5 +1,6 @@
 // components/sections/LeakSection.tsx
 // "The leak" — problem-mirror split. Home page only, no existing counterpart.
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function LeakSection() {
@@ -70,32 +71,17 @@ export default function LeakSection() {
             overflow: 'hidden',
             minHeight: '260px',
             aspectRatio: '4/3',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '12px',
-            textAlign: 'center',
-            color: '#fff',
-            padding: '24px',
-            background: 'linear-gradient(135deg,#2b3f74 0%,#3a5a86 60%,#4f86a0 100%)',
+            background: '#fff',
+            border: '1px solid #DFE5ED',
             boxShadow: '0 10px 34px rgba(22,41,79,.10)',
           }}
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.6}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ width: '44px', height: '44px', opacity: 0.9 }}
-          >
-            <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-          </svg>
-          <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', letterSpacing: '.06em', maxWidth: '24ch', color: '#eef4ff' }}>
-            Store analytics on a laptop
-          </figcaption>
+          <Image
+            src="/images/Iqrar_khoso_A_glossy_3D_funnel_with_a_heavy_stream_of_navy_visitor_spheres_po_2048b448-eb1c-449e-887c-5be0fb07f715.png"
+            alt="Traffic in, orders out, with the leak between"
+            fill
+            style={{ objectFit: 'contain', background: '#fff' }}
+          />
         </figure>
       </div>
 

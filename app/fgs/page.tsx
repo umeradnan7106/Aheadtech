@@ -2,6 +2,7 @@
 // Fashion Growth System — the open program page. New route, no Sanity wiring (hardcoded
 // copy matching the mockup, same approach as the home page redesign).
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -31,20 +32,34 @@ const ctaGhost: React.CSSProperties = { display: 'inline-flex', alignItems: 'cen
 export default function FGSPage() {
   return (
     <>
-      {/* Hero */}
-      <section style={{ position: 'relative', color: '#fff', padding: '88px 32px 70px', overflow: 'hidden', background: 'linear-gradient(135deg,#1b356e 0%,#16294F 60%,#101f3d 100%)' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(115deg,rgba(16,25,45,.72),rgba(16,25,45,.4) 70%,rgba(16,25,45,.2))' }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto' }}>
-          <span style={{ ...eyebrow, color: '#8ff0c0' }}>The program, open now</span>
-          <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#fff', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '20ch' }}>
-            The Fashion Growth System
-          </h1>
-          <p style={{ fontSize: '1.18rem', color: '#e6edf9', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
-            A 90 day engagement for apparel brands doing $500K to $1M that turns your store, ads, creative, and email
-            into one revenue machine.
-          </p>
-          <div style={{ marginTop: '24px' }}>
-            <Link href="/apply" style={ctaGreen}>Apply Now</Link>
+      {/* Hero (split): text left, illustration right, on light panel */}
+      <section style={{ background: '#F2F5F8' }}>
+        <div
+          className="fgs-hero-grid"
+          style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '40px', alignItems: 'center', minHeight: '460px' }}
+        >
+          <div className="fgs-hero-text" style={{ padding: '64px 0' }}>
+            <span style={eyebrow}>The program, open now</span>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(2rem,4.6vw,3.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em', maxWidth: '20ch' }}>
+              The Fashion Growth System
+            </h1>
+            <p style={{ fontSize: '1.18rem', color: '#6E8098', maxWidth: '56ch', marginTop: '14px', fontFamily: 'var(--font-jakarta)', lineHeight: 1.62 }}>
+              A 90 day engagement for apparel brands doing $500K to $1M that turns your store, ads, creative, and email
+              into one revenue machine.
+            </p>
+            <div style={{ marginTop: '24px' }}>
+              <Link href="/apply" style={ctaGreen}>Apply Now</Link>
+            </div>
+          </div>
+          <div style={{ position: 'relative', alignSelf: 'stretch', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              src="/images/Iqrar_khoso_One_large_glossy_green_anchor-offer_box_in_the_center_labeled_AN_d9a722bf-6887-4952-853f-a2b72e7f4580.png"
+              alt="Apparel brand launch in motion"
+              width={640}
+              height={640}
+              style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain', borderRadius: '14px' }}
+              priority
+            />
           </div>
         </div>
       </section>
@@ -61,12 +76,13 @@ export default function FGSPage() {
               Email exists but does not sell.
             </p>
           </div>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#2a4d92 0%,#3a63ad 60%,#6f8fc9 100%)' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 21c1-5 5-7 8-7s7 2 8 7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Apparel founder at work</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED' }}>
+            <Image
+              src="/images/Iqrar_khoso_On_the_left_five_small_disconnected_navy_boxes_scattered_and_tan_4b5d4041-5cbc-41f2-a92e-25b9d0e8b001.png"
+              alt="Apparel founder at work"
+              fill
+              style={{ objectFit: 'contain' }}
+            />
           </figure>
         </div>
       </section>
@@ -92,12 +108,13 @@ export default function FGSPage() {
       {/* Structure */}
       <section style={{ padding: '80px 32px', background: '#fff' }}>
         <div className="fgs-split-rev" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#2b3f74 0%,#3a5a86 60%,#4f86a0 100%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M6 3h8l4 4v14H6V3zM14 3v4h4" />
-              <path d="M9 12h6M9 16h6" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Weekly reporting</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', order: 1 }}>
+            <Image
+              src="/images/Iqrar_khoso_A_single_glossy_3D_floating_translucent_glass_report_panel_with_t_1313d59d-9a1c-4e8d-95bb-918641134b32 (1).png"
+              alt="Weekly reporting"
+              fill
+              style={{ objectFit: 'contain' }}
+            />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The structure</span>
@@ -167,6 +184,8 @@ export default function FGSPage() {
           .fgs-split, .fgs-split-rev { grid-template-columns: 1fr !important; }
           .fgs-split-rev figure { order: 1 !important; }
           .fgs-ogrid { grid-template-columns: 1fr 1fr !important; }
+          .fgs-hero-grid { grid-template-columns: 1fr !important; min-height: 0 !important; gap: 0 !important; }
+          .fgs-hero-text { padding: 56px 0 28px !important; }
         }
       `}</style>
     </>

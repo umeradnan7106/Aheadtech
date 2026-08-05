@@ -2,6 +2,7 @@
 // SEO service page. New route, no Sanity wiring (hardcoded copy matching the mockup's
 // reusable service-page template).
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -49,12 +50,8 @@ export default function SeoPage() {
       {/* The fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="svc-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#1c8f75 0%,#25B472 70%,#57c98f 100%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <circle cx="11" cy="11" r="6" />
-              <path d="M20 20l-4-4" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Search results ranking</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', order: 1 }}>
+            <Image src="/images/Iqrar_khoso_Glossy_3D_horizontal_search-result_rows_stacked_the_top_row_risi_e3f3eba3-2b90-4ddc-b238-78bc181e0b3a.png" alt="Search results ranking" fill style={{ objectFit: 'contain' }} />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>

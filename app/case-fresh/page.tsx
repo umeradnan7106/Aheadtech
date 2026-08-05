@@ -2,6 +2,7 @@
 // Case study: FreshFits — verified numbers, no arc. New route, hardcoded copy, no Sanity wiring.
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'FreshFits Case Study — AheadTech360',
@@ -18,6 +19,7 @@ const STATS = [
 const eyebrow: React.CSSProperties = { display: 'inline-block', fontFamily: 'var(--font-jetbrains)', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', color: '#1C8F5A', fontWeight: 600, marginBottom: '14px' }
 const h2: React.CSSProperties = { fontFamily: 'var(--font-bricolage)', fontSize: 'clamp(1.55rem,3.2vw,2.3rem)', fontWeight: 800, color: '#1C2A42', lineHeight: 1.13, letterSpacing: '-0.02em' }
 const ctaGreen: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '1rem', padding: '.82rem 1.55rem', borderRadius: '12px', background: '#25B472', color: '#05261a', textDecoration: 'none' }
+const ctaGhost: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '.95rem', padding: '.7rem 1.3rem', borderRadius: '10px', border: '1px solid #DFE5ED', color: '#213D79', textDecoration: 'none' }
 const bodyText: React.CSSProperties = { fontSize: '1rem', color: '#6E8098', lineHeight: 1.7, fontFamily: 'var(--font-jakarta)', maxWidth: '62ch' }
 
 export default function CaseFreshPage() {
@@ -72,11 +74,13 @@ export default function CaseFreshPage() {
               recorded sales. May was the soft launch.
             </p>
           </div>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#2b3f74 0%,#3a5a86 60%,#4f86a0 100%)' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Launch and offer setup</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)' }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_funnel_shown_front-on_At_the_wide_top_many_small_na_555ed1b0-024c-440d-8c2e-480cc71601f5.png"
+              alt="Launch and offer setup"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
           </figure>
         </div>
       </section>
@@ -84,11 +88,13 @@ export default function CaseFreshPage() {
       {/* Fix */}
       <section style={{ padding: '80px 32px', background: '#F2F5F8' }}>
         <div className="case-fix-split" style={{ maxWidth: '1180px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: '46px', alignItems: 'start' }}>
-          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', textAlign: 'center', color: '#fff', padding: '24px', background: 'linear-gradient(135deg,#213D79 0%,#1f6f6d 80%,#25B472 130%)', order: 1 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{ width: '44px', height: '44px', opacity: 0.9 }}>
-              <path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" />
-            </svg>
-            <figcaption style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '.74rem', color: '#eef4ff' }}>Hero product concentration</figcaption>
+          <figure style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', minHeight: '260px', aspectRatio: '4/3', background: '#fff', border: '1px solid #DFE5ED', boxShadow: '0 10px 34px rgba(22,41,79,.10)', order: 1 }}>
+            <Image
+              src="/images/Iqrar_khoso_A_glossy_3D_floating_translucent_glass_ads_dashboard_with_a_risin_15d64cec-7a61-40cc-9661-b3afb4e911d6.png"
+              alt="Hero product concentration"
+              fill
+              style={{ objectFit: 'contain', background: '#fff' }}
+            />
           </figure>
           <div style={{ order: 2 }}>
             <span style={eyebrow}>The fix</span>
@@ -100,6 +106,10 @@ export default function CaseFreshPage() {
               held above PKR 3,300 on almost no discounting, proof that multi-pack bundling lifts AOV without
               cutting price.
             </p>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '20px' }}>
+              <Link href="/fgs" style={ctaGreen}>See the Program</Link>
+              <Link href="/clients" style={ctaGhost}>All Clients</Link>
+            </div>
           </div>
         </div>
       </section>
